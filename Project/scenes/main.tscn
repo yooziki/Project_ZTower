@@ -1,6 +1,6 @@
-[gd_scene load_steps=34 format=3 uid="uid://di3jfrboebmws"]
+[gd_scene load_steps=33 format=3 uid="uid://di3jfrboebmws"]
 
-[ext_resource type="Texture2D" uid="uid://b2g1q3cy5d6pk" path="res://assets/tilesets/floortileset.png" id="1_00j23"]
+[ext_resource type="TileSet" uid="uid://cnpuw21l8ntc6" path="res://scenes/ground_tile.tres" id="1_l3u7j"]
 [ext_resource type="Texture2D" uid="uid://cwgvd2gm3mkay" path="res://assets/character/rpg-character_transparent.png" id="2_nksxc"]
 [ext_resource type="Script" path="res://scripts/Character.gd" id="2_s1ruk"]
 [ext_resource type="Script" path="res://scripts/Grid.gd" id="3_x3dgk"]
@@ -16,78 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://bxui501eh6xrj" path="res://assets/icon/bullseye.svg" id="12_qck18"]
 [ext_resource type="Texture2D" uid="uid://bjnodbb1crchv" path="res://assets/icon/dodging.svg" id="12_tingi"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1yaul"]
-texture = ExtResource("1_00j23")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-4:0/0 = 0
-5:0/0 = 0
-6:0/0 = 0
-7:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-4:1/0 = 0
-5:1/0 = 0
-6:1/0 = 0
-7:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-4:2/0 = 0
-5:2/0 = 0
-6:2/0 = 0
-7:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-4:3/0 = 0
-5:3/0 = 0
-6:3/0 = 0
-7:3/0 = 0
-0:4/0 = 0
-1:4/0 = 0
-2:4/0 = 0
-3:4/0 = 0
-4:4/0 = 0
-5:4/0 = 0
-6:4/0 = 0
-7:4/0 = 0
-0:5/0 = 0
-1:5/0 = 0
-2:5/0 = 0
-3:5/0 = 0
-4:5/0 = 0
-5:5/0 = 0
-6:5/0 = 0
-7:5/0 = 0
-0:6/0 = 0
-1:6/0 = 0
-2:6/0 = 0
-3:6/0 = 0
-4:6/0 = 0
-5:6/0 = 0
-6:6/0 = 0
-7:6/0 = 0
-0:7/0 = 0
-1:7/0 = 0
-2:7/0 = 0
-3:7/0 = 0
-4:7/0 = 0
-5:7/0 = 0
-6:7/0 = 0
-7:7/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_nvj5r"]
-tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetAtlasSource_1yaul")
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mkwo"]
 size = Vector2(256, 32)
 
@@ -101,7 +29,7 @@ size = Vector2(32, 256)
 size = Vector2(32, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fthmr"]
-size = Vector2(32, 32)
+size = Vector2(5, 5)
 
 [sub_resource type="Animation" id="Animation_wkgao"]
 length = 0.001
@@ -229,10 +157,12 @@ font = ExtResource("8_mf4kv")
 font_size = 10
 outline_size = 1
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ut88c"]
+
 [node name="Main" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_nvj5r")
+tile_set = ExtResource("1_l3u7j")
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 131072, 4, 65536, 131072, 4, 131072, 131072, 4, 196608, 131072, 4, 262144, 131072, 4, 327680, 131072, 4, 393216, 131072, 4, 1, 131072, 4, 65537, 0, 1, 131073, 0, 0, 196609, 0, 0, 262145, 0, 0, 327681, 0, 0, 393217, 0, 0, 2, 131072, 4, 65538, 0, 0, 131074, 0, 0, 196610, 0, 0, 262146, 0, 1, 327682, 0, 0, 393218, 0, 0, 3, 131072, 4, 65539, 0, 0, 131075, 0, 0, 196611, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 1, 4, 131072, 4, 65540, 0, 0, 131076, 0, 0, 196612, 0, 0, 262148, 0, 0, 327684, 0, 0, 393220, 0, 0, 5, 131072, 4, 65541, 0, 1, 131077, 0, 0, 196613, 0, 0, 262149, 0, 0, 327685, 0, 0, 393221, 0, 0, 6, 131072, 4, 65542, 0, 0, 131078, 0, 0, 196614, 0, 0, 262150, 0, 0, 327686, 0, 1, 393222, 0, 0, 458752, 131072, 4, 458753, 131072, 4, 458754, 131072, 4, 458755, 131072, 4, 458756, 131072, 4, 458757, 131072, 4, 458758, 131072, 4, 7, 131072, 4, 65543, 131072, 4, 131079, 131072, 4, 196615, 131072, 4, 262151, 131072, 4, 327687, 131072, 4, 393223, 131072, 4, 458759, 131072, 4)
 
@@ -269,13 +199,10 @@ centered = false
 z_index = 2
 z_as_relative = false
 position = Vector2(192, 64)
+collision_layer = 31
+collision_mask = 31
 script = ExtResource("2_s1ruk")
 speed = 6
-
-[node name="PointingRay" type="RayCast2D" parent="Character"]
-position = Vector2(16, 16)
-target_position = Vector2(0, 32)
-collide_with_areas = true
 
 [node name="Collision" type="CollisionShape2D" parent="Character"]
 position = Vector2(16, 16)
@@ -296,18 +223,33 @@ libraries = {
 
 [node name="TransformCamera" type="RemoteTransform2D" parent="Character"]
 
+[node name="PointingRayLeft" type="RayCast2D" parent="Character"]
+position = Vector2(16, 16)
+target_position = Vector2(-32, 0)
+collision_mask = 31
+collide_with_areas = true
+
+[node name="PointingRayUp" type="RayCast2D" parent="Character"]
+position = Vector2(16, 16)
+target_position = Vector2(0, -32)
+collision_mask = 31
+collide_with_areas = true
+
+[node name="PointingRayDown" type="RayCast2D" parent="Character"]
+position = Vector2(16, 16)
+target_position = Vector2(0, 32)
+collision_mask = 31
+collide_with_areas = true
+
+[node name="PointingRayRight" type="RayCast2D" parent="Character"]
+position = Vector2(16, 16)
+target_position = Vector2(32, 0)
+collision_mask = 31
+collide_with_areas = true
+
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(131, 128)
 zoom = Vector2(2.5, 2.5)
-
-[node name="Button" type="Button" parent="."]
-editor_description = "主动道具"
-offset_left = -91.0
-offset_top = 197.0
-offset_right = -14.0
-offset_bottom = 242.0
-theme_override_styles/normal = SubResource("StyleBoxLine_ddv83")
-text = "主动道具"
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -315,6 +257,15 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("6_2dql0")
+
+[node name="UseItem" type="Button" parent="Control"]
+editor_description = "主动道具"
+offset_left = -91.0
+offset_top = 197.0
+offset_right = -14.0
+offset_bottom = 242.0
+theme_override_styles/normal = SubResource("StyleBoxLine_ddv83")
+text = "主动道具"
 
 [node name="MonsterInfoBox" type="Panel" parent="Control"]
 layout_mode = 0
@@ -527,3 +478,14 @@ offset_right = 101.0
 offset_bottom = 28.0
 text = "12"
 label_settings = SubResource("LabelSettings_mb0mk")
+
+[node name="Monster" type="CharacterBody2D" parent="." groups=["Monster"]]
+position = Vector2(111, 80)
+collision_layer = 31
+collision_mask = 5
+
+[node name="MonsterCol" type="CollisionShape2D" parent="Monster"]
+shape = SubResource("RectangleShape2D_ut88c")
+
+[node name="MonsterSprite" type="Sprite2D" parent="Monster"]
+texture = ExtResource("7_2lxbn")

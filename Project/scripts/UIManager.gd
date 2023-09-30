@@ -3,7 +3,7 @@ extends Node
 @onready var LabelATT = $PlayerValueBox/LabelATT
 
 func refreshValueUI(LabelATT):
-	print("刷新数值")
+	# print("刷新数值")
 	LabelATT.text = str(int(RandomNumberGenerator.new().randf_range(1,10)))
 
 
