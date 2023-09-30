@@ -8,3 +8,6 @@
 [Godot4.0中文视频教程](https://b23.tv/xsHGiwA)
 
 [Godot英文视频教学](https://www.youtube.com/playlist?list=PLJ690cxlZTgL4i3sjTPRQTyrJ5TTkYJ2_)
+
+### 美术资源
+[itch.io](https://itch.io/game-assets)
