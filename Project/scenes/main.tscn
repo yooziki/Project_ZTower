@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://di3jfrboebmws"]
+[gd_scene load_steps=32 format=3 uid="uid://di3jfrboebmws"]
 
 [ext_resource type="TileSet" uid="uid://cnpuw21l8ntc6" path="res://scenes/ground_tile.tres" id="1_l3u7j"]
 [ext_resource type="Texture2D" uid="uid://cwgvd2gm3mkay" path="res://assets/character/rpg-character_transparent.png" id="2_nksxc"]
@@ -15,18 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://b8a4td11s0ia8" path="res://assets/icon/barefoot.svg" id="10_xr6tq"]
 [ext_resource type="Texture2D" uid="uid://bxui501eh6xrj" path="res://assets/icon/bullseye.svg" id="12_qck18"]
 [ext_resource type="Texture2D" uid="uid://bjnodbb1crchv" path="res://assets/icon/dodging.svg" id="12_tingi"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4mkwo"]
-size = Vector2(256, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b1wx6"]
-size = Vector2(256, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gb0eh"]
-size = Vector2(32, 256)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x22e4"]
-size = Vector2(32, 256)
+[ext_resource type="Script" path="res://scripts/Monster.gd" id="16_elei0"]
+[ext_resource type="Theme" uid="uid://c3v6nbfriop2c" path="res://scenes/MonsterHPBarTheme.tres" id="17_6wyy4"]
+[ext_resource type="LabelSettings" uid="uid://cx6fnsfwwj8i2" path="res://scenes/MonsterHPBarFont.tres" id="18_wxl7m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fthmr"]
 size = Vector2(5, 5)
@@ -150,6 +141,7 @@ anti_aliasing = false
 
 [sub_resource type="LabelSettings" id="LabelSettings_mb0mk"]
 font = ExtResource("8_mf4kv")
+font_size = 32
 outline_size = 1
 
 [sub_resource type="LabelSettings" id="LabelSettings_0d556"]
@@ -162,27 +154,12 @@ outline_size = 1
 [node name="Main" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(2, 2)
 tile_set = ExtResource("1_l3u7j")
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 131072, 4, 65536, 131072, 4, 131072, 131072, 4, 196608, 131072, 4, 262144, 131072, 4, 327680, 131072, 4, 393216, 131072, 4, 1, 131072, 4, 65537, 0, 1, 131073, 0, 0, 196609, 0, 0, 262145, 0, 0, 327681, 0, 0, 393217, 0, 0, 2, 131072, 4, 65538, 0, 0, 131074, 0, 0, 196610, 0, 0, 262146, 0, 1, 327682, 0, 0, 393218, 0, 0, 3, 131072, 4, 65539, 0, 0, 131075, 0, 0, 196611, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 1, 4, 131072, 4, 65540, 0, 0, 131076, 0, 0, 196612, 0, 0, 262148, 0, 0, 327684, 0, 0, 393220, 0, 0, 5, 131072, 4, 65541, 0, 1, 131077, 0, 0, 196613, 0, 0, 262149, 0, 0, 327685, 0, 0, 393221, 0, 0, 6, 131072, 4, 65542, 0, 0, 131078, 0, 0, 196614, 0, 0, 262150, 0, 0, 327686, 0, 1, 393222, 0, 0, 458752, 131072, 4, 458753, 131072, 4, 458754, 131072, 4, 458755, 131072, 4, 458756, 131072, 4, 458757, 131072, 4, 458758, 131072, 4, 7, 131072, 4, 65543, 131072, 4, 131079, 131072, 4, 196615, 131072, 4, 262151, 131072, 4, 327687, 131072, 4, 393223, 131072, 4, 458759, 131072, 4)
 
 [node name="Clips" type="Area2D" parent="."]
-
-[node name="Bottom" type="CollisionShape2D" parent="Clips"]
-position = Vector2(128, 240)
-shape = SubResource("RectangleShape2D_4mkwo")
-
-[node name="Top" type="CollisionShape2D" parent="Clips"]
-position = Vector2(128, 16)
-shape = SubResource("RectangleShape2D_b1wx6")
-
-[node name="Right" type="CollisionShape2D" parent="Clips"]
-position = Vector2(240, 128)
-shape = SubResource("RectangleShape2D_gb0eh")
-
-[node name="Left" type="CollisionShape2D" parent="Clips"]
-position = Vector2(16, 128)
-shape = SubResource("RectangleShape2D_x22e4")
 
 [node name="Grid" type="Node2D" parent="."]
 z_index = 1
@@ -198,7 +175,8 @@ centered = false
 [node name="Character" type="Area2D" parent="."]
 z_index = 2
 z_as_relative = false
-position = Vector2(192, 64)
+position = Vector2(193, 63)
+scale = Vector2(2, 2)
 collision_layer = 31
 collision_mask = 31
 script = ExtResource("2_s1ruk")
@@ -247,9 +225,13 @@ target_position = Vector2(32, 0)
 collision_mask = 31
 collide_with_areas = true
 
+[node name="AttackCD" type="Timer" parent="Character"]
+wait_time = 0.5
+one_shot = true
+
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(131, 128)
-zoom = Vector2(2.5, 2.5)
+position = Vector2(260, 252)
+zoom = Vector2(1.2, 1.2)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -260,19 +242,20 @@ script = ExtResource("6_2dql0")
 
 [node name="UseItem" type="Button" parent="Control"]
 editor_description = "主动道具"
-offset_left = -91.0
-offset_top = 197.0
-offset_right = -14.0
-offset_bottom = 242.0
+layout_mode = 0
+offset_left = -192.0
+offset_top = 422.0
+offset_right = -95.0
+offset_bottom = 498.0
 theme_override_styles/normal = SubResource("StyleBoxLine_ddv83")
 text = "主动道具"
 
 [node name="MonsterInfoBox" type="Panel" parent="Control"]
 layout_mode = 0
-offset_left = 264.0
-offset_top = 2.0
-offset_right = 353.0
-offset_bottom = 42.0
+offset_left = 554.0
+offset_top = 22.0
+offset_right = 643.0
+offset_bottom = 62.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_lwcxd")
 
 [node name="AvatarFrame" type="Panel" parent="Control/MonsterInfoBox"]
@@ -301,29 +284,29 @@ expand_mode = 1
 
 [node name="PlayerValueBox" type="Panel" parent="Control"]
 layout_mode = 0
-offset_left = -95.0
-offset_top = 44.0
-offset_right = -39.0
-offset_bottom = 172.0
+offset_left = -192.0
+offset_top = 117.0
+offset_right = -110.0
+offset_bottom = 321.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_lwcxd")
 
 [node name="IconATT" type="TextureRect" parent="Control/PlayerValueBox"]
 modulate = Color(1, 0.156863, 0, 1)
 texture_filter = 1
 layout_mode = 1
-offset_left = 14.0
-offset_top = 9.0
-offset_right = 30.0
-offset_bottom = 25.0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 32.0
+offset_bottom = 31.0
 texture = ExtResource("7_q6yxf")
 expand_mode = 1
 
 [node name="LabelATT" type="Label" parent="Control/PlayerValueBox"]
 layout_mode = 1
-offset_left = 33.0
-offset_top = 8.0
-offset_right = 73.0
-offset_bottom = 28.0
+offset_left = 38.0
+offset_top = 5.0
+offset_right = 78.0
+offset_bottom = 41.0
 text = "3"
 label_settings = SubResource("LabelSettings_mb0mk")
 
@@ -331,28 +314,28 @@ label_settings = SubResource("LabelSettings_mb0mk")
 modulate = Color(0, 0.509804, 1, 1)
 texture_filter = 1
 layout_mode = 1
-offset_left = 12.0
-offset_top = 29.0
-offset_right = 28.0
-offset_bottom = 45.0
+offset_left = 5.0
+offset_top = 43.0
+offset_right = 29.0
+offset_bottom = 67.0
 texture = ExtResource("7_2d38y")
 expand_mode = 1
 
 [node name="LabelDEF" type="Label" parent="Control/PlayerValueBox"]
 layout_mode = 1
-offset_left = 32.0
-offset_top = 29.0
-offset_right = 72.0
-offset_bottom = 49.0
+offset_left = 40.0
+offset_top = 108.0
+offset_right = 80.0
+offset_bottom = 144.0
 text = "3"
 label_settings = SubResource("LabelSettings_mb0mk")
 
 [node name="LabelSPD" type="Label" parent="Control/PlayerValueBox"]
 layout_mode = 0
-offset_left = 32.0
-offset_top = 50.0
-offset_right = 72.0
-offset_bottom = 70.0
+offset_left = 38.0
+offset_top = 41.0
+offset_right = 78.0
+offset_bottom = 77.0
 text = "3"
 label_settings = SubResource("LabelSettings_mb0mk")
 
@@ -360,10 +343,10 @@ label_settings = SubResource("LabelSettings_mb0mk")
 modulate = Color(0.388235, 1, 1, 1)
 texture_filter = 1
 layout_mode = 0
-offset_left = 13.0
-offset_top = 50.0
-offset_right = 29.0
-offset_bottom = 66.0
+offset_left = 9.0
+offset_top = 75.0
+offset_right = 33.0
+offset_bottom = 99.0
 texture = ExtResource("10_xr6tq")
 expand_mode = 1
 
@@ -371,10 +354,10 @@ expand_mode = 1
 modulate = Color(0.878431, 1, 0, 1)
 texture_filter = 1
 layout_mode = 0
-offset_left = 12.0
-offset_top = 73.0
-offset_right = 28.0
-offset_bottom = 89.0
+offset_left = 9.0
+offset_top = 113.0
+offset_right = 33.0
+offset_bottom = 137.0
 texture = ExtResource("10_id4at")
 expand_mode = 1
 
@@ -382,19 +365,19 @@ expand_mode = 1
 modulate = Color(0.905882, 0.658824, 0.184314, 1)
 texture_filter = 1
 layout_mode = 0
-offset_left = 14.0
-offset_top = 109.0
-offset_right = 24.0
-offset_bottom = 119.0
+offset_left = 10.0
+offset_top = 173.0
+offset_right = 26.0
+offset_bottom = 189.0
 texture = ExtResource("12_qck18")
 expand_mode = 1
 
 [node name="LabelCRI" type="Label" parent="Control/PlayerValueBox"]
 layout_mode = 0
-offset_left = 29.0
-offset_top = 109.0
-offset_right = 45.0
-offset_bottom = 123.0
+offset_left = 37.0
+offset_top = 178.0
+offset_right = 53.0
+offset_bottom = 192.0
 text = "25%"
 label_settings = SubResource("LabelSettings_0d556")
 
@@ -402,45 +385,45 @@ label_settings = SubResource("LabelSettings_0d556")
 modulate = Color(0.709804, 0.709804, 0.709804, 1)
 texture_filter = 1
 layout_mode = 0
-offset_left = 14.0
-offset_top = 95.0
-offset_right = 24.0
-offset_bottom = 105.0
+offset_left = 11.0
+offset_top = 150.0
+offset_right = 27.0
+offset_bottom = 166.0
 texture = ExtResource("12_tingi")
 expand_mode = 1
 
 [node name="LabelDOG" type="Label" parent="Control/PlayerValueBox"]
 layout_mode = 0
-offset_left = 29.0
-offset_top = 94.0
-offset_right = 45.0
-offset_bottom = 108.0
+offset_left = 36.0
+offset_top = 152.0
+offset_right = 52.0
+offset_bottom = 166.0
 text = "25%"
 label_settings = SubResource("LabelSettings_0d556")
 
 [node name="LabelLUCK" type="Label" parent="Control/PlayerValueBox"]
 layout_mode = 0
-offset_left = 32.0
+offset_left = 39.0
 offset_top = 73.0
-offset_right = 72.0
-offset_bottom = 93.0
+offset_right = 79.0
+offset_bottom = 109.0
 text = "3"
 label_settings = SubResource("LabelSettings_mb0mk")
 
 [node name="PlayerInfoBox" type="Panel" parent="Control"]
 layout_mode = 0
-offset_left = -95.0
-offset_top = 4.0
-offset_right = -11.0
-offset_bottom = 38.0
+offset_left = -193.0
+offset_top = 20.0
+offset_right = -52.0
+offset_bottom = 77.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_lwcxd")
 
 [node name="AvatarFrame" type="Panel" parent="Control/PlayerInfoBox"]
 layout_mode = 1
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 37.0
-offset_bottom = 30.0
+offset_left = 7.0
+offset_top = 12.0
+offset_right = 55.0
+offset_bottom = 46.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_v4142")
 
 [node name="TextureRect" type="TextureRect" parent="Control/PlayerInfoBox/AvatarFrame"]
@@ -450,10 +433,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -14.0
-offset_top = -12.5
-offset_right = 12.0
-offset_bottom = 10.5
+offset_left = -18.0
+offset_top = -12.0
+offset_right = 17.0
+offset_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_2lxbn")
@@ -463,29 +446,60 @@ expand_mode = 1
 modulate = Color(1, 0.156863, 0.811765, 1)
 texture_filter = 1
 layout_mode = 0
-offset_left = 42.0
-offset_top = 9.0
-offset_right = 59.0
-offset_bottom = 24.0
+offset_left = 65.0
+offset_top = 18.0
+offset_right = 89.0
+offset_bottom = 42.0
 texture = ExtResource("10_ob2rm")
 expand_mode = 1
 
 [node name="LabelATT" type="Label" parent="Control/PlayerInfoBox"]
 layout_mode = 0
-offset_left = 61.0
-offset_top = 8.0
-offset_right = 101.0
-offset_bottom = 28.0
+offset_left = 90.0
+offset_top = 12.0
+offset_right = 130.0
+offset_bottom = 48.0
 text = "12"
 label_settings = SubResource("LabelSettings_mb0mk")
 
 [node name="Monster" type="CharacterBody2D" parent="." groups=["Monster"]]
-position = Vector2(111, 80)
+position = Vector2(353, 159)
+scale = Vector2(2, 2)
 collision_layer = 31
 collision_mask = 5
+script = ExtResource("16_elei0")
 
 [node name="MonsterCol" type="CollisionShape2D" parent="Monster"]
+position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_ut88c")
 
 [node name="MonsterSprite" type="Sprite2D" parent="Monster"]
+position = Vector2(-0.5, 0)
 texture = ExtResource("7_2lxbn")
+
+[node name="Control" type="Control" parent="Monster"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BarHP" type="ProgressBar" parent="Monster/Control"]
+layout_mode = 0
+offset_left = -17.0
+offset_top = 9.0
+offset_right = 15.0
+offset_bottom = 16.0
+theme = ExtResource("17_6wyy4")
+value = 5.0
+show_percentage = false
+
+[node name="LabelHP" type="Label" parent="Monster/Control"]
+layout_mode = 1
+offset_left = -16.5
+offset_top = 6.5
+offset_right = 23.5
+offset_bottom = 32.5
+text = "26"
+label_settings = ExtResource("18_wxl7m")
+
+[connection signal="timeout" from="Character/AttackCD" to="Character" method="_on_attack_cd_timeout"]

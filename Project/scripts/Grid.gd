@@ -8,16 +8,16 @@ func _ready():
 	var y = 0
 	for i in range(0,max):
 		var linex = Line2D.new()
-		linex.add_point(Vector2i(x*32,0))
-		linex.add_point(Vector2i(x*32,max*32))
+		linex.add_point(Vector2i(x*64,0))
+		linex.add_point(Vector2i(x*64,max*64))
 		linex.width = 1
 		linex.default_color = Color(255,255,255,0.2)
 		linex.z_index = 10
 		add_child(linex)
 		
 		var liney = Line2D.new()
-		liney.add_point(Vector2i(0,y*32))
-		liney.add_point(Vector2i(max*32,y*32))
+		liney.add_point(Vector2i(0,y*64))
+		liney.add_point(Vector2i(max*64,y*64))
 		liney.width = 1
 		liney.default_color = Color(255,255,255,0.2)
 		liney.z_index = 10

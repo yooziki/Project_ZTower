@@ -24,8 +24,12 @@ class Monster:
 	
 class Player:
 	extends Role
-	func _init():
+	func _init(HP,ATT,DEF,SPD):
 		print("创建 Player："+name)
+		self.HP = HP
+		self.ATT = ATT
+		self.DEF = DEF
+		self.SPD = SPD
 	
 
 
