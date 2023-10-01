@@ -4,8 +4,10 @@ class Role:
 	extends Object
 	var HP: int
 	var ATT: int
-	var SPD: int
 	var DEF: int
+	var SPD: int
+	var DOG: int
+	var CRI: int
 	var name: String
 
 class Monster:
@@ -24,12 +26,16 @@ class Monster:
 	
 class Player:
 	extends Role
-	func _init(HP,ATT,DEF,SPD):
+	var LUCK: int
+	func _init(HP,ATT,DEF,SPD,LUCK,DOG,CRI):
 		print("创建 Player："+name)
 		self.HP = HP
 		self.ATT = ATT
 		self.DEF = DEF
 		self.SPD = SPD
+		self.LUCK = LUCK
+		self.DOG = DOG
+		self.CRI = CRI
 	
 
 
