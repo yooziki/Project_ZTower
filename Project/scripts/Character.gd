@@ -9,6 +9,7 @@ extends Area2D
 @export var DOG = 2
 @export var CRI = 2
 
+signal  choose_eq(eq)
 var moving = false
 var tile_size = 64
 var movement_direction = 0 # 0-不动 1-上 2-下 3-左 4-右
@@ -16,6 +17,7 @@ var UIManager
 var turnFirstFrame
 var pressed = []
 var attack_in_cd = false
+
 @onready var ui_manager = $"../Control"
 @onready var ray_up = $PointingRayUp
 @onready var ray_down = $PointingRayDown
@@ -67,6 +69,14 @@ func _ready():
 	ui_manager.refresh_ui(self)
 
 func _input(event):
+	if !Main_gd.player_control:
+		var change_eq_box = $"/root/Main/Control/PopUpBox"
+		if event.is_action_pressed("moveright"):
+			change_eq_box.change_eq_choose("right",self)
+		elif event.is_action_pressed("moveleft"):
+			change_eq_box.change_eq_choose("left",self)
+		elif event.is_action_pressed("movedown"):
+			change_eq_box.change_eq_choose("down",self)
 	if event.as_text() in ["W", "A", "S", "D"]:
 		if event.is_action_pressed("moveright"):
 			pressed.append(4)
@@ -92,7 +102,8 @@ func _input(event):
 			movement_direction = 0
 
 func _physics_process(delta):
-	if moving:
+
+	if moving || !Main_gd.player_control:
 		return
 	var collider = ray_array[movement_direction-1].get_collider()
 	if movement_direction != 0:
@@ -101,6 +112,12 @@ func _physics_process(delta):
 		elif collider.is_in_group("Monster") && !attack_in_cd:
 			print("向怪物攻击")
 			attack_monster(collider,movement_direction)
+		elif collider.is_in_group("Equipment") && !collider.dying:
+			print("尝试拾取装备")
+			collider.dying = true
+			animator.play(player_anims_attack[movement_direction])
+			collider.try_get_equipment(self)
+			ui_manager.refresh_ui(self)
 
 func attack_monster(monster,dir):
 	animator.play(player_anims_attack[movement_direction])
@@ -113,8 +130,6 @@ func attack_monster(monster,dir):
 	await get_tree().create_timer(0.65).timeout
 	animator.play(player_anims_idle[dir])
 	print("播放动画："+str(player_anims_idle[dir]))
-
-
 
 func move(dir):
 			print("尝试移动")
@@ -135,3 +150,5 @@ func _on_attack_cd_timeout():
 	#长按方向键时的攻击CD计时
 	attack_in_cd = false
 	pass
+
+

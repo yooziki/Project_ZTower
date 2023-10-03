@@ -1,0 +1,147 @@
+[gd_scene load_steps=11 format=3 uid="uid://b3pxpg8svawr"]
+
+[ext_resource type="StyleBox" uid="uid://bob4v5lfr2uyv" path="res://scenes/BlackAndWhite.tres" id="1_1k2v5"]
+[ext_resource type="Script" path="res://scripts/change_equipment_pop_up_box.gd" id="1_3yy74"]
+[ext_resource type="Texture2D" uid="uid://bg8pywc5kggqy" path="res://assets/临时资源/像素RPG游戏图标 装备物品道具武器素材 手游2D资源防具技能食物/武器/W_Axe004.png" id="2_xorew"]
+[ext_resource type="Texture2D" uid="uid://bs87g6nsopyf7" path="res://assets/临时资源/像素RPG游戏图标 装备物品道具武器素材 手游2D资源防具技能食物/武器/W_Axe003.png" id="3_eq6rx"]
+[ext_resource type="LabelSettings" uid="uid://dtlee2oottm2v" path="res://scenes/NormalLabelSetting.tres" id="4_fsthw"]
+[ext_resource type="LabelSettings" uid="uid://debsfgvwloi8d" path="res://scenes/SmallLabelSetting.tres" id="5_buxi0"]
+
+[sub_resource type="Animation" id="Animation_1luby"]
+resource_name = "FadeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1e-05), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_esxh2"]
+resource_name = "FadeOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_p44p8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4xr6q"]
+_data = {
+"FadeIn": SubResource("Animation_1luby"),
+"FadeOut": SubResource("Animation_esxh2"),
+"RESET": SubResource("Animation_p44p8")
+}
+
+[node name="PopUpBox" type="Panel"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_3yy74")
+
+[node name="ChangeEquipmentBox" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -19.0
+offset_top = 75.0
+offset_right = 548.0
+offset_bottom = 427.0
+theme_override_styles/panel = ExtResource("1_1k2v5")
+
+[node name="TargetEquipment" type="TextureRect" parent="ChangeEquipmentBox"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 132.0
+offset_right = 141.0
+offset_bottom = 185.0
+texture = ExtResource("2_xorew")
+
+[node name="SourceEquipment" type="TextureRect" parent="ChangeEquipmentBox"]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 129.0
+offset_right = 472.0
+offset_bottom = 191.0
+texture = ExtResource("3_eq6rx")
+
+[node name="TargetLabel" type="Label" parent="ChangeEquipmentBox"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 80.0
+offset_right = 166.0
+offset_bottom = 116.0
+text = "新装备"
+label_settings = ExtResource("4_fsthw")
+
+[node name="SourceLabel" type="Label" parent="ChangeEquipmentBox"]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 83.0
+offset_right = 476.0
+offset_bottom = 119.0
+text = "当前装备"
+label_settings = ExtResource("4_fsthw")
+
+[node name="TitleLabel" type="Label" parent="ChangeEquipmentBox"]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 25.0
+offset_right = 380.0
+offset_bottom = 61.0
+text = "选哪个？"
+label_settings = ExtResource("4_fsthw")
+
+[node name="SourceDes" type="Label" parent="ChangeEquipmentBox"]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 197.0
+offset_right = 512.0
+offset_bottom = 305.0
+text = "装备描述"
+label_settings = ExtResource("5_buxi0")
+
+[node name="TargetDes" type="Label" parent="ChangeEquipmentBox"]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 195.0
+offset_right = 119.0
+offset_bottom = 318.0
+text = "新装备"
+label_settings = ExtResource("5_buxi0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4xr6q")
+}
+
+[node name="Character" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 214.0
+offset_top = 193.0
+offset_right = 254.0
+offset_bottom = 233.0
+scale = Vector2(2, 2)

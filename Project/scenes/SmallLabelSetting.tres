@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://debsfgvwloi8d"]
+
+[ext_resource type="FontFile" uid="uid://bpevby5jsckb8" path="res://assets/font/ark-pixel-12px-monospaced-zh_cn.ttf" id="1_bni8f"]
+
+[resource]
+font = ExtResource("1_bni8f")
+font_size = 20
+outline_size = 1

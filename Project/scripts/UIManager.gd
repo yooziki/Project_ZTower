@@ -19,6 +19,7 @@ func refresh_ui(player):
 	LabelHP.text = str(player.HP)
 	pass
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

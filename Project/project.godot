@@ -15,6 +15,13 @@ run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Settings="*res://data/excel_export/settings.gd"
+Main_gd="*res://scripts/Main.gd"
+Buff_gd="*res://scripts/Buff.gd"
+Equipment_gd="*res://scripts/Equipment.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"

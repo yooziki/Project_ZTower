@@ -1,0 +1,5 @@
+asyncio-DEBUG:Using proactor: IocpProactor
+excelexporter.engine-INFO:使用插件导出器 GDS2.0 :excelexporter.generators.gds2
+excelexporter.engine-INFO:导出：D:\MyGame\Project_ZTower\Project\data\excel\buffConfig.xlsx:buffConfig => D:\MyGame\Project_ZTower\Project\data\excel_export\buffConfig\buffConfig.gd
+excelexporter.engine-INFO:导出：D:\MyGame\Project_ZTower\Project\data\excel\equipmentConfig.xlsx:equipementConfig => D:\MyGame\Project_ZTower\Project\data\excel_export\equipmentConfig\equipementConfig.gd
+excelexporter.generators.gds2-INFO:创建setting.gd
