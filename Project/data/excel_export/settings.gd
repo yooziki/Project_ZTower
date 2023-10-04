@@ -4,3 +4,4 @@ extends Node
 
 var buffConfig = load('res://data/excel_export/buffConfig/buffConfig.gd').new()
 var equipementConfig = load('res://data/excel_export/equipmentConfig/equipementConfig.gd').new()
+var propertyConfig = load('res://data/excel_export/propertyConfig/propertyConfig.gd').new()

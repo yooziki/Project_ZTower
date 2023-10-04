@@ -6,6 +6,7 @@ func add_buff(chara,buff_id):
 	chara.ATT += buff_data[buff_id].ATT
 	chara.DEF += buff_data[buff_id].DEF
 	chara.HP += buff_data[buff_id].HP
+	chara.MAXHP += buff_data[buff_id].HP
 	chara.LUCK += buff_data[buff_id].LUCK
 	chara.DOG += buff_data[buff_id].DOG
 	chara.CRI += buff_data[buff_id].CRI
@@ -16,6 +17,7 @@ func remove_buff(chara,buff_id):
 	chara.ATT -= buff_data[buff_id].ATT
 	chara.DEF -= buff_data[buff_id].DEF
 	chara.HP -= buff_data[buff_id].HP
+	chara.MAXHP -= buff_data[buff_id].HP
 	chara.LUCK -= buff_data[buff_id].LUCK
 	chara.DOG -= buff_data[buff_id].DOG
 	chara.CRI -= buff_data[buff_id].CRI

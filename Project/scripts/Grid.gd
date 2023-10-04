@@ -12,7 +12,7 @@ func _ready():
 		linex.add_point(Vector2i(x*64,max*64))
 		linex.width = 1
 		linex.default_color = Color(255,255,255,0.2)
-		linex.z_index = 10
+		linex.z_index = 1
 		add_child(linex)
 		
 		var liney = Line2D.new()
@@ -20,7 +20,7 @@ func _ready():
 		liney.add_point(Vector2i(max*64,y*64))
 		liney.width = 1
 		liney.default_color = Color(255,255,255,0.2)
-		liney.z_index = 10
+		liney.z_index = 1
 		add_child(liney)
 		
 		x += 1

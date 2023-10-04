@@ -8,6 +8,16 @@ extends Node
 @onready var LabelLUCK = $PlayerValueBox/LabelLUCK
 @onready var LabelHP = $PlayerInfoBox/LabelHP
 
+@onready var IconATT = $PlayerValueBox/IconATT
+@onready var IconDEF = $PlayerValueBox/IconDEF
+@onready var IconSPD = $PlayerValueBox/IconSPD
+@onready var IconCRI = $PlayerValueBox/IconCRI
+@onready var IconDOG = $PlayerValueBox/IconDOG
+@onready var IconLUCK = $PlayerValueBox/IconLUCK
+@onready var IconHP = $PlayerInfoBox/IconHP
+
+@onready var icon_array = [IconHP,IconATT,IconDEF,IconSPD,IconLUCK,IconDOG,IconCRI]
+
 func refresh_ui(player):
 	# print("刷新数值")
 	LabelATT.text = str(player.ATT)
@@ -16,7 +26,7 @@ func refresh_ui(player):
 	LabelCRI.text = str(player.CRI)+"%"
 	LabelDOG.text = str(player.DOG)+"%"
 	LabelLUCK.text = str(player.LUCK)
-	LabelHP.text = str(player.HP)
+	LabelHP.text = str(player.HP) + "/" + str(player.MAXHP)
 	pass
 
 

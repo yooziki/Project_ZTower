@@ -14,28 +14,40 @@ var change_eq_node
 @onready var control = $"/root/Main/Control"
 @onready var player_eq_box = control.get_node("PlayerEqBox")
 
-func get_equipment(chara,eq_id):
+func get_equipment(chara,eq_id,delete_eq,is_play_delete_anim):
+	dying = true
 	var buff_id = eq_data[eq_id].buffID
 	Buff_gd.add_buff(chara,buff_id)
 	var eq_icon = load("res://assets/临时资源/像素RPG游戏图标 装备物品道具武器素材 手游2D资源防具技能食物/武器/"+eq_data[eq_id].icon)		
 	if Main_gd.eq_slot[eq_data[eq_id].slotID]:
 		Buff_gd.remove_buff(chara,Main_gd.eq_slot[eq_data[eq_id].slotID].buff_id)
-	Main_gd.eq_slot[eq_data[eq_id].slotID] = self	
+	Main_gd.eq_slot[eq_data[eq_id].slotID] = self.duplicate()	
 	Equipment_gd.player_eq_box.get_child(eq_data[eq_id].slotID).get_node("TextureRect").texture = eq_icon
 	Equipment_gd.player_eq_box.get_child(eq_data[eq_id].slotID).get_node("Label").text = ""
 	control.refresh_ui(chara)
-
-func try_get_equipment(chara):
+	if is_play_delete_anim:
+		animator.play("get")
+		await animator.animation_finished 
+		delete_eq.queue_free()
+	else:
+		delete_eq.queue_free()			 
+		
+		
+func try_get(chara):
 	print("拾取装备："+str(eq_id))
 	if Main_gd.eq_slot[eq_data[eq_id].slotID]:
 		Main_gd.changing_eq = eq_id
+		Main_gd.is_equipment_change = true
 		change_equipment(eq_id)
+
 	else:	
 		animator.play("get")
-		get_equipment(chara,eq_id)
+		get_equipment(chara,eq_id,self,true)
+
 	pass
 
 func change_equipment(eq_id):
+	Main_gd.delete_eq = self
 	Main_gd.player_control = false
 	control.add_child(change_eq_node)
 	change_eq_node.get_node("AnimationPlayer").play("FadeIn")

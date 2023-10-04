@@ -1,0 +1,173 @@
+[gd_scene load_steps=9 format=3 uid="uid://cvwcw65wjlr8s"]
+
+[ext_resource type="StyleBox" uid="uid://bob4v5lfr2uyv" path="res://scenes/BlackAndWhite.tres" id="1_flqya"]
+[ext_resource type="Script" path="res://scripts/change_property_pop_up_box.gd" id="1_srux2"]
+[ext_resource type="LabelSettings" uid="uid://dtlee2oottm2v" path="res://scenes/NormalLabelSetting.tres" id="4_xh57f"]
+[ext_resource type="Texture2D" uid="uid://ds0axcx26hx1e" path="res://assets/icon/arrow-cursor.svg" id="6_i6vsl"]
+
+[sub_resource type="Animation" id="Animation_1luby"]
+resource_name = "FadeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1e-05), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_esxh2"]
+resource_name = "FadeOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_p44p8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4xr6q"]
+_data = {
+"FadeIn": SubResource("Animation_1luby"),
+"FadeOut": SubResource("Animation_esxh2"),
+"RESET": SubResource("Animation_p44p8")
+}
+
+[node name="PopUpBox" type="Control"]
+z_index = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_srux2")
+
+[node name="ChangePropertyBox" type="Panel" parent="."]
+offset_left = -19.0
+offset_top = 33.0
+offset_right = 548.0
+offset_bottom = 470.0
+theme_override_styles/panel = ExtResource("1_flqya")
+
+[node name="LeftLabel" type="Label" parent="ChangePropertyBox"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 136.0
+offset_right = 145.0
+offset_bottom = 172.0
+text = "描述"
+label_settings = ExtResource("4_xh57f")
+
+[node name="RightLabel" type="Label" parent="ChangePropertyBox"]
+layout_mode = 0
+offset_left = 427.0
+offset_top = 137.0
+offset_right = 555.0
+offset_bottom = 173.0
+text = "描述"
+label_settings = ExtResource("4_xh57f")
+
+[node name="TitleLabel" type="Label" parent="ChangePropertyBox"]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 25.0
+offset_right = 380.0
+offset_bottom = 61.0
+text = "选哪个？"
+label_settings = ExtResource("4_xh57f")
+
+[node name="DownLabel" type="Label" parent="ChangePropertyBox"]
+offset_left = 241.0
+offset_top = 308.0
+offset_right = 337.0
+offset_bottom = 344.0
+text = "再想想"
+label_settings = ExtResource("4_xh57f")
+
+[node name="TextureRect" type="TextureRect" parent="ChangePropertyBox"]
+layout_mode = 0
+offset_left = 371.0
+offset_top = 149.0
+offset_right = 421.0
+offset_bottom = 199.0
+rotation = 2.00702
+texture = ExtResource("6_i6vsl")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="ChangePropertyBox"]
+offset_left = 197.0
+offset_top = 164.0
+offset_right = 247.0
+offset_bottom = 214.0
+rotation = 5.13436
+texture = ExtResource("6_i6vsl")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="ChangePropertyBox"]
+offset_left = 292.0
+offset_top = 248.0
+offset_right = 342.0
+offset_bottom = 298.0
+rotation = 3.53237
+texture = ExtResource("6_i6vsl")
+expand_mode = 1
+
+[node name="PropertyTextureDown" type="Control" parent="ChangePropertyBox"]
+anchors_preset = 0
+offset_left = 263.0
+offset_top = 252.0
+offset_right = 303.0
+offset_bottom = 292.0
+
+[node name="PropertyTextureLeft" type="Control" parent="ChangePropertyBox"]
+anchors_preset = 0
+offset_left = 166.0
+offset_top = 133.0
+offset_right = 206.0
+offset_bottom = 173.0
+
+[node name="PropertyTextureRight" type="Control" parent="ChangePropertyBox"]
+anchors_preset = 0
+offset_left = 373.0
+offset_top = 141.0
+offset_right = 413.0
+offset_bottom = 181.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4xr6q")
+}
+
+[node name="Character" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 231.0
+offset_top = 164.0
+offset_right = 271.0
+offset_bottom = 204.0
+scale = Vector2(2, 2)

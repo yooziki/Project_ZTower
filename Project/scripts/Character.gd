@@ -2,6 +2,7 @@ extends Area2D
 
 @export var move_speed = 2
 @export var HP = 2
+@export var MAXHP = 2
 @export var ATT = 2
 @export var DEF = 2
 @export var SPD = 2
@@ -69,14 +70,24 @@ func _ready():
 	ui_manager.refresh_ui(self)
 
 func _input(event):
-	if !Main_gd.player_control:
+	if !Main_gd.player_control && Main_gd.is_equipment_change:
 		var change_eq_box = $"/root/Main/Control/PopUpBox"
 		if event.is_action_pressed("moveright"):
-			change_eq_box.change_eq_choose("right",self)
+			change_eq_box.change_eq_choose("right",self,Main_gd.delete_eq)
 		elif event.is_action_pressed("moveleft"):
-			change_eq_box.change_eq_choose("left",self)
+			change_eq_box.change_eq_choose("left",self,Main_gd.delete_eq)
 		elif event.is_action_pressed("movedown"):
-			change_eq_box.change_eq_choose("down",self)
+			change_eq_box.change_eq_choose("down",self,Main_gd.delete_eq)
+	if !Main_gd.player_control && Main_gd.is_property_change:
+		var change_pp_box = $"/root/Main/Control/PopUpBox"
+		if event.is_action_pressed("moveright"):
+			change_pp_box.change_pp_choose("right",self)
+		elif event.is_action_pressed("moveleft"):
+			change_pp_box.change_pp_choose("left",self)
+		elif event.is_action_pressed("movedown"):
+			change_pp_box.change_pp_choose("down",self)
+		ui_manager.refresh_ui(self)
+			
 	if event.as_text() in ["W", "A", "S", "D"]:
 		if event.is_action_pressed("moveright"):
 			pressed.append(4)
@@ -110,13 +121,10 @@ func _physics_process(delta):
 		if !collider:
 			move(movement_direction)
 		elif collider.is_in_group("Monster") && !attack_in_cd:
-			print("向怪物攻击")
 			attack_monster(collider,movement_direction)
-		elif collider.is_in_group("Equipment") && !collider.dying:
-			print("尝试拾取装备")
-			collider.dying = true
+		elif collider.is_in_group("CanGet") && !collider.dying:
 			animator.play(player_anims_attack[movement_direction])
-			collider.try_get_equipment(self)
+			collider.try_get(self)
 			ui_manager.refresh_ui(self)
 
 func attack_monster(monster,dir):
@@ -132,23 +140,32 @@ func attack_monster(monster,dir):
 	print("播放动画："+str(player_anims_idle[dir]))
 
 func move(dir):
-			print("尝试移动")
-			$"../Highlight".position = position + inputs[dir] * tile_size	
-			var movementTween = get_tree().create_tween()
-			movementTween.tween_property(self, "position", position + inputs[dir] * tile_size, 0.8 / move_speed).set_trans(Tween.TRANS_LINEAR)
-			moving = true
-			print(player_anims[dir])
-			animator.play(player_anims[dir])
-			await movementTween.finished
-			moving = false
-			animator.stop()
-			ui_manager.refresh_ui(self)
-			print("playanim" + player_anims_idle[dir])
-			animator.play(player_anims_idle[dir])
+	print("尝试移动")
+	$"../Highlight".position = position + inputs[dir] * tile_size	
+	var movementTween = get_tree().create_tween()
+	movementTween.tween_property(self, "position", position + inputs[dir] * tile_size, 0.8 / move_speed).set_trans(Tween.TRANS_LINEAR)
+	moving = true
+	print(player_anims[dir])
+	animator.play(player_anims[dir])
+	await movementTween.finished
+	moving = false
+	animator.stop()
+	ui_manager.refresh_ui(self)
+	print("playanim" + player_anims_idle[dir])
+	animator.play(player_anims_idle[dir])
 
 func _on_attack_cd_timeout():
 	#长按方向键时的攻击CD计时
 	attack_in_cd = false
 	pass
+	
+func hp_change(hp_change):
+	HP += hp_change
+	if HP > MAXHP:
+		HP = MAXHP
+	elif HP < 0:
+		HP = 0
+	
+		
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3pxpg8svawr"]
+[gd_scene load_steps=12 format=3 uid="uid://b3pxpg8svawr"]
 
 [ext_resource type="StyleBox" uid="uid://bob4v5lfr2uyv" path="res://scenes/BlackAndWhite.tres" id="1_1k2v5"]
 [ext_resource type="Script" path="res://scripts/change_equipment_pop_up_box.gd" id="1_3yy74"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bs87g6nsopyf7" path="res://assets/临时资源/像素RPG游戏图标 装备物品道具武器素材 手游2D资源防具技能食物/武器/W_Axe003.png" id="3_eq6rx"]
 [ext_resource type="LabelSettings" uid="uid://dtlee2oottm2v" path="res://scenes/NormalLabelSetting.tres" id="4_fsthw"]
 [ext_resource type="LabelSettings" uid="uid://debsfgvwloi8d" path="res://scenes/SmallLabelSetting.tres" id="5_buxi0"]
+[ext_resource type="Texture2D" uid="uid://ds0axcx26hx1e" path="res://assets/icon/arrow-cursor.svg" id="7_8eb4c"]
 
 [sub_resource type="Animation" id="Animation_1luby"]
 resource_name = "FadeIn"
@@ -60,6 +61,7 @@ _data = {
 }
 
 [node name="PopUpBox" type="Panel"]
+z_index = 3
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_3yy74")
@@ -67,42 +69,42 @@ script = ExtResource("1_3yy74")
 [node name="ChangeEquipmentBox" type="Panel" parent="."]
 layout_mode = 0
 offset_left = -19.0
-offset_top = 75.0
+offset_top = 33.0
 offset_right = 548.0
-offset_bottom = 427.0
+offset_bottom = 470.0
 theme_override_styles/panel = ExtResource("1_1k2v5")
 
 [node name="TargetEquipment" type="TextureRect" parent="ChangeEquipmentBox"]
 layout_mode = 0
-offset_left = 88.0
-offset_top = 132.0
-offset_right = 141.0
-offset_bottom = 185.0
+offset_left = 159.0
+offset_top = 127.0
+offset_right = 212.0
+offset_bottom = 180.0
 texture = ExtResource("2_xorew")
 
 [node name="SourceEquipment" type="TextureRect" parent="ChangeEquipmentBox"]
 layout_mode = 0
-offset_left = 410.0
-offset_top = 129.0
-offset_right = 472.0
-offset_bottom = 191.0
+offset_left = 364.0
+offset_top = 128.0
+offset_right = 426.0
+offset_bottom = 190.0
 texture = ExtResource("3_eq6rx")
 
 [node name="TargetLabel" type="Label" parent="ChangeEquipmentBox"]
 layout_mode = 0
-offset_left = 70.0
-offset_top = 80.0
-offset_right = 166.0
-offset_bottom = 116.0
+offset_left = 31.0
+offset_top = 135.0
+offset_right = 127.0
+offset_bottom = 171.0
 text = "新装备"
 label_settings = ExtResource("4_fsthw")
 
 [node name="SourceLabel" type="Label" parent="ChangeEquipmentBox"]
 layout_mode = 0
-offset_left = 380.0
-offset_top = 83.0
-offset_right = 476.0
-offset_bottom = 119.0
+offset_left = 427.0
+offset_top = 137.0
+offset_right = 555.0
+offset_bottom = 173.0
 text = "当前装备"
 label_settings = ExtResource("4_fsthw")
 
@@ -117,21 +119,57 @@ label_settings = ExtResource("4_fsthw")
 
 [node name="SourceDes" type="Label" parent="ChangeEquipmentBox"]
 layout_mode = 0
-offset_left = 352.0
-offset_top = 197.0
-offset_right = 512.0
-offset_bottom = 305.0
+offset_left = 374.0
+offset_top = 198.0
+offset_right = 534.0
+offset_bottom = 306.0
 text = "装备描述"
 label_settings = ExtResource("5_buxi0")
 
 [node name="TargetDes" type="Label" parent="ChangeEquipmentBox"]
 layout_mode = 0
-offset_left = 59.0
-offset_top = 195.0
-offset_right = 119.0
-offset_bottom = 318.0
+offset_left = 29.0
+offset_top = 193.0
+offset_right = 164.0
+offset_bottom = 316.0
 text = "新装备"
 label_settings = ExtResource("5_buxi0")
+
+[node name="CloseDes" type="Label" parent="ChangeEquipmentBox"]
+offset_left = 253.0
+offset_top = 253.0
+offset_right = 322.0
+offset_bottom = 289.0
+text = "再想想"
+label_settings = ExtResource("5_buxi0")
+
+[node name="TextureRect" type="TextureRect" parent="ChangeEquipmentBox"]
+layout_mode = 0
+offset_left = 371.0
+offset_top = 149.0
+offset_right = 421.0
+offset_bottom = 199.0
+rotation = 2.00702
+texture = ExtResource("7_8eb4c")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="ChangeEquipmentBox"]
+offset_left = 197.0
+offset_top = 164.0
+offset_right = 247.0
+offset_bottom = 214.0
+rotation = 5.13436
+texture = ExtResource("7_8eb4c")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="ChangeEquipmentBox"]
+offset_left = 292.0
+offset_top = 248.0
+offset_right = 342.0
+offset_bottom = 298.0
+rotation = 3.53237
+texture = ExtResource("7_8eb4c")
+expand_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -140,8 +178,8 @@ libraries = {
 
 [node name="Character" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 214.0
-offset_top = 193.0
-offset_right = 254.0
-offset_bottom = 233.0
+offset_left = 231.0
+offset_top = 164.0
+offset_right = 271.0
+offset_bottom = 204.0
 scale = Vector2(2, 2)

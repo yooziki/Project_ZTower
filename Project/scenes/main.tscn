@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://di3jfrboebmws"]
+[gd_scene load_steps=65 format=3 uid="uid://di3jfrboebmws"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_e4qtw"]
 [ext_resource type="TileSet" uid="uid://cnpuw21l8ntc6" path="res://scenes/ground_tile.tres" id="1_l3u7j"]
@@ -25,6 +25,10 @@
 [ext_resource type="LabelSettings" uid="uid://cx6fnsfwwj8i2" path="res://scenes/MonsterHPBarFont.tres" id="18_wxl7m"]
 [ext_resource type="Texture2D" uid="uid://bkq7i4vrec3ep" path="res://assets/临时资源/像素RPG游戏图标 装备物品道具武器素材 手游2D资源防具技能食物/技能图标/icon_96.png" id="20_a7jkc"]
 [ext_resource type="Script" path="res://scripts/Equipment.gd" id="20_h8pky"]
+[ext_resource type="Texture2D" uid="uid://ued4jdi3wvgv" path="res://assets/临时资源/像素RPG游戏图标 装备物品道具武器素材 手游2D资源防具技能食物/普通物品/I_Book.png" id="26_1fdbs"]
+[ext_resource type="Script" path="res://scripts/Property.gd" id="26_lp11m"]
+[ext_resource type="Script" path="res://scripts/HPRecover.gd" id="28_oc3tp"]
+[ext_resource type="Texture2D" uid="uid://c4jrhcgl6u32k" path="res://assets/临时资源/像素RPG游戏图标 装备物品道具武器素材 手游2D资源防具技能食物/药瓶/icon_29.png" id="29_0rgk1"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_ddv83"]
 
@@ -78,7 +82,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(10, 0)]
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_fdl72"]
@@ -760,6 +764,7 @@ texture = ExtResource("5_38jlr")
 centered = false
 
 [node name="Control" type="Control" parent="."]
+z_index = 2
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -820,19 +825,19 @@ theme_override_styles/panel = ExtResource("6_2nd7x")
 modulate = Color(1, 0.156863, 0, 1)
 texture_filter = 1
 layout_mode = 1
-offset_left = 8.0
-offset_top = 7.0
-offset_right = 32.0
-offset_bottom = 31.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 34.0
+offset_bottom = 34.0
 texture = ExtResource("8_f5o0u")
 expand_mode = 1
 
 [node name="LabelATT" type="Label" parent="Control/PlayerValueBox"]
 layout_mode = 1
 offset_left = 38.0
-offset_top = 5.0
+offset_top = 7.0
 offset_right = 78.0
-offset_bottom = 41.0
+offset_bottom = 43.0
 text = "3"
 label_settings = ExtResource("9_4acap")
 
@@ -849,19 +854,19 @@ expand_mode = 1
 
 [node name="LabelDEF" type="Label" parent="Control/PlayerValueBox"]
 layout_mode = 1
-offset_left = 207.0
-offset_top = 8.0
-offset_right = 247.0
-offset_bottom = 44.0
+offset_left = 96.0
+offset_top = 7.0
+offset_right = 136.0
+offset_bottom = 43.0
 text = "3"
 label_settings = ExtResource("9_4acap")
 
 [node name="LabelSPD" type="Label" parent="Control/PlayerValueBox"]
 layout_mode = 0
-offset_left = 99.0
-offset_top = 9.0
-offset_right = 139.0
-offset_bottom = 45.0
+offset_left = 149.0
+offset_top = 7.0
+offset_right = 189.0
+offset_bottom = 43.0
 text = "3"
 label_settings = ExtResource("9_4acap")
 
@@ -929,19 +934,19 @@ label_settings = SubResource("LabelSettings_0d556")
 
 [node name="LabelLUCK" type="Label" parent="Control/PlayerValueBox"]
 layout_mode = 0
-offset_left = 150.0
-offset_top = 9.0
-offset_right = 190.0
-offset_bottom = 45.0
+offset_left = 206.0
+offset_top = 7.0
+offset_right = 246.0
+offset_bottom = 43.0
 text = "3"
 label_settings = ExtResource("9_4acap")
 
 [node name="PlayerInfoBox" type="Panel" parent="Control"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = -15.0
-offset_right = 149.0
-offset_bottom = 42.0
+offset_left = -14.0
+offset_top = -20.0
+offset_right = 153.0
+offset_bottom = 37.0
 theme_override_styles/panel = ExtResource("6_2nd7x")
 
 [node name="AvatarFrame" type="Panel" parent="Control/PlayerInfoBox"]
@@ -972,20 +977,20 @@ expand_mode = 1
 modulate = Color(1, 0.156863, 0.811765, 1)
 texture_filter = 1
 layout_mode = 0
-offset_left = 65.0
+offset_left = 55.0
 offset_top = 18.0
-offset_right = 89.0
+offset_right = 79.0
 offset_bottom = 42.0
 texture = ExtResource("15_ecdta")
 expand_mode = 1
 
 [node name="LabelHP" type="Label" parent="Control/PlayerInfoBox"]
 layout_mode = 0
-offset_left = 90.0
+offset_left = 78.0
 offset_top = 12.0
-offset_right = 130.0
+offset_right = 158.0
 offset_bottom = 48.0
-text = "12"
+text = "12/12"
 label_settings = ExtResource("9_4acap")
 
 [node name="PlayerEqBox" type="Panel" parent="Control"]
@@ -1140,6 +1145,7 @@ collision_mask = 31
 script = ExtResource("2_s1ruk")
 move_speed = 6
 HP = 10
+MAXHP = 10
 ATT = 3
 DEF = 0
 LUCK = 0
@@ -1151,7 +1157,6 @@ position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_fthmr")
 
 [node name="CharacterSprite" type="Sprite2D" parent="Character"]
-position = Vector2(10, 0)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_xiauc")
 offset = Vector2(27, 20)
@@ -1249,7 +1254,7 @@ offset_bottom = 31.5
 text = "26"
 label_settings = ExtResource("18_wxl7m")
 
-[node name="Equipment" type="Area2D" parent="." groups=["Equipment"]]
+[node name="Equipment" type="Area2D" parent="." groups=["CanGet", "Equipment"]]
 position = Vector2(128, 128)
 scale = Vector2(2, 2)
 script = ExtResource("20_h8pky")
@@ -1267,7 +1272,7 @@ libraries = {
 position = Vector2(15, 15)
 shape = SubResource("RectangleShape2D_28m1a")
 
-[node name="Equipment2" type="Area2D" parent="." groups=["Equipment"]]
+[node name="Equipment2" type="Area2D" parent="." groups=["CanGet", "Equipment"]]
 position = Vector2(194, 128)
 scale = Vector2(2, 2)
 script = ExtResource("20_h8pky")
@@ -1282,6 +1287,42 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Equipment2"]
+position = Vector2(15, 15)
+shape = SubResource("RectangleShape2D_28m1a")
+
+[node name="Property" type="Area2D" parent="." groups=["CanGet", "Property"]]
+position = Vector2(126, 268)
+scale = Vector2(2, 2)
+script = ExtResource("26_lp11m")
+
+[node name="PropertySprite" type="Sprite2D" parent="Property"]
+position = Vector2(16, 16)
+texture = ExtResource("26_1fdbs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Property/PropertySprite"]
+libraries = {
+"": SubResource("AnimationLibrary_s7q1h")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Property"]
+position = Vector2(15, 15)
+shape = SubResource("RectangleShape2D_28m1a")
+
+[node name="HPRecover" type="Area2D" parent="." groups=["CanGet"]]
+position = Vector2(258, 268)
+scale = Vector2(2, 2)
+script = ExtResource("28_oc3tp")
+
+[node name="HPRecoverSprite" type="Sprite2D" parent="HPRecover"]
+position = Vector2(16, 16)
+texture = ExtResource("29_0rgk1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HPRecover/HPRecoverSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_s7q1h")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HPRecover"]
 position = Vector2(15, 15)
 shape = SubResource("RectangleShape2D_28m1a")
 
