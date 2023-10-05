@@ -8,19 +8,19 @@ var pp_right = randi_range(1,4)
 func change_pp_choose(dir,chara):
 	if dir == "right":
 		$Character/character_sprite/AnimationPlayer.play("attack_right")
-		Buff_gd.add_buff(chara,pp_right+1001)
+		Buff_gd.add_buff(chara,pp_right+100001)
 		await get_tree().create_timer(0.5).timeout
 		$AnimationPlayer.play("FadeOut")
 		Main_gd.player_control = true
 	if dir == "left":
 		$Character/character_sprite/AnimationPlayer.play("attack_left")
-		Buff_gd.add_buff(chara,pp_left+1001)
+		Buff_gd.add_buff(chara,pp_left+100001)
 		await get_tree().create_timer(0.5).timeout
 		$AnimationPlayer.play("FadeOut")
 		Main_gd.player_control = true
 	if dir == "down":
 		$Character/character_sprite/AnimationPlayer.play("attack_down")
-		Buff_gd.add_buff(chara,1001)
+		Buff_gd.add_buff(chara,100001)
 		await get_tree().create_timer(0.5).timeout
 		$AnimationPlayer.play("FadeOut")
 		Main_gd.player_control = true
@@ -39,10 +39,6 @@ func _ready():
 	elif pp_right == pp_left && pp_left != 1:
 		pp_right -= 1	
 	
-	#var left_icon = load("res://assets/icon/value/"+property_data[pp_left].icon)
-	#var right_icon = load("res://assets/icon/value/"+property_data[pp_right].icon)
-	#var down_icon = load("res://assets/icon/value/"+property_data[0].icon)
-	
 	var left_icon = control.icon_array[pp_left].duplicate()
 	var right_icon = control.icon_array[pp_right].duplicate()
 	var down_icon = control.icon_array[0].duplicate()
@@ -51,13 +47,17 @@ func _ready():
 	right_icon.position = Vector2(0,0)
 	down_icon.position = Vector2(0,0)
 	
+	left_icon.scale = Vector2(3,3)
+	right_icon.scale = Vector2(3,3)
+	down_icon.scale = Vector2(3,3)
+	
 	$ChangePropertyBox/PropertyTextureLeft.add_child(left_icon)
 	$ChangePropertyBox/PropertyTextureRight.add_child(right_icon)
 	$ChangePropertyBox/PropertyTextureDown.add_child(down_icon)
 
-	$ChangePropertyBox/LeftLabel.text = buff_data[pp_left+1001].name
-	$ChangePropertyBox/RightLabel.text = buff_data[pp_right+1001].name
-	$ChangePropertyBox/DownLabel.text = buff_data[1001].name
+	$ChangePropertyBox/LeftLabel.text = buff_data[pp_left+100001].name
+	$ChangePropertyBox/RightLabel.text = buff_data[pp_right+100001].name
+	$ChangePropertyBox/DownLabel.text = buff_data[100001].name
 
 	
 	pass # Replace with function body.

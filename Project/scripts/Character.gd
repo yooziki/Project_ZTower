@@ -12,7 +12,6 @@ extends Area2D
 
 signal  choose_eq(eq)
 var moving = false
-var tile_size = 64
 var movement_direction = 0 # 0-不动 1-上 2-下 3-左 4-右
 var UIManager
 var turnFirstFrame
@@ -26,7 +25,6 @@ var attack_in_cd = false
 @onready var ray_right = $PointingRayRight
 @onready var attack_cd = $AttackCD
 @onready var ray_array = [ray_up,ray_down,ray_left,ray_right]
-@onready var target_area = $Area2D
 @onready var animator = $CharacterSprite/AnimationPlayer
 
 var inputs = {
@@ -61,7 +59,7 @@ var player_anims_attack = {
 const Class := preload("res://scripts/Class.gd")
 
 func _ready():
-	#position = position.snapped(Vector2.ONE * tile_size)
+	#position = position.snapped(Vector2.ONE * Main_gd.tile_size)
 	#ui_manager.refresh_ui(self)
 	$CharacterSprite/AnimationPlayer.speed_scale = move_speed
 	animator.play(player_anims_idle[2])
@@ -131,19 +129,15 @@ func attack_monster(monster,dir):
 	animator.play(player_anims_attack[movement_direction])
 	attack_in_cd = true
 	attack_cd.start()
-	print("怪物被攻击，剩余血量："+str(monster.HP))
-	print("玩家当前攻击力："+str(ATT))
 	monster.attacked(self,movement_direction)
 	#await animator.animation_finished
 	await get_tree().create_timer(0.65).timeout
 	animator.play(player_anims_idle[dir])
-	print("播放动画："+str(player_anims_idle[dir]))
 
 func move(dir):
-	print("尝试移动")
-	$"../Highlight".position = position + inputs[dir] * tile_size	
+	$"../Highlight".position = position + inputs[dir] * Main_gd.tile_size	
 	var movementTween = get_tree().create_tween()
-	movementTween.tween_property(self, "position", position + inputs[dir] * tile_size, 0.8 / move_speed).set_trans(Tween.TRANS_LINEAR)
+	movementTween.tween_property(self, "position", position + inputs[dir] * Main_gd.tile_size, 0.8 / move_speed).set_trans(Tween.TRANS_LINEAR)
 	moving = true
 	print(player_anims[dir])
 	animator.play(player_anims[dir])
@@ -151,7 +145,6 @@ func move(dir):
 	moving = false
 	animator.stop()
 	ui_manager.refresh_ui(self)
-	print("playanim" + player_anims_idle[dir])
 	animator.play(player_anims_idle[dir])
 
 func _on_attack_cd_timeout():

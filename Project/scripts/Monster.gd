@@ -6,7 +6,7 @@ var SPD: int
 var DEF: int
 var NAME: String
 @onready var animator = $MonsterSprite/AnimationPlayer
-@onready var ui_manager = $"../Control"
+@onready var ui_manager = $"/root/Main/Control"
 var monster_anims_attack = {
 	4: "attack_left",
 	3: "attack_right",

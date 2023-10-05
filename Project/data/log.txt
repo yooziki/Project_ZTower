@@ -4,5 +4,5 @@ excelexporter.engine-INFO:导出：D:\MyGame\Project_ZTower\Project\data\excel\buff
 excelexporter.engine-INFO:导出：D:\MyGame\Project_ZTower\Project\data\excel\equipmentConfig.xlsx:equipementConfig => D:\MyGame\Project_ZTower\Project\data\excel_export\equipmentConfig\equipementConfig.gd
 excelexporter.engine-INFO:导出：D:\MyGame\Project_ZTower\Project\data\excel\propertyConfig.xlsx:propertyConfig => D:\MyGame\Project_ZTower\Project\data\excel_export\propertyConfig\propertyConfig.gd
 excelexporter.engine-WARNING:~$buffConfig.xlsx 不是配置表，跳过！
-excelexporter.engine-WARNING:~$propertyConfig.xlsx 不是配置表，跳过！
+excelexporter.engine-WARNING:~$equipmentConfig.xlsx 不是配置表，跳过！
 excelexporter.generators.gds2-INFO:创建setting.gd

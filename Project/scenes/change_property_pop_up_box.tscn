@@ -7,6 +7,7 @@
 
 [sub_resource type="Animation" id="Animation_1luby"]
 resource_name = "FadeIn"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -22,6 +23,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_esxh2"]
 resource_name = "FadeOut"
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -68,27 +70,65 @@ grow_vertical = 2
 script = ExtResource("1_srux2")
 
 [node name="ChangePropertyBox" type="Panel" parent="."]
+layout_mode = 0
 offset_left = -19.0
 offset_top = 33.0
 offset_right = 548.0
 offset_bottom = 470.0
 theme_override_styles/panel = ExtResource("1_flqya")
 
+[node name="GridPanel" type="Control" parent="ChangePropertyBox"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -3.0
+offset_top = 9.0
+offset_right = 37.0
+offset_bottom = 49.0
+
+[node name="Panel3" type="Panel" parent="ChangePropertyBox/GridPanel"]
+offset_left = 249.0
+offset_top = 188.0
+offset_right = 324.0
+offset_bottom = 263.0
+theme_override_styles/panel = ExtResource("1_flqya")
+
+[node name="Panel6" type="Panel" parent="ChangePropertyBox/GridPanel"]
+offset_left = 323.0
+offset_top = 117.0
+offset_right = 398.0
+offset_bottom = 192.0
+theme_override_styles/panel = ExtResource("1_flqya")
+
+[node name="Panel5" type="Panel" parent="ChangePropertyBox/GridPanel"]
+offset_left = 250.0
+offset_top = 117.0
+offset_right = 325.0
+offset_bottom = 192.0
+theme_override_styles/panel = ExtResource("1_flqya")
+
+[node name="Panel" type="Panel" parent="ChangePropertyBox/GridPanel"]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 117.0
+offset_right = 253.0
+offset_bottom = 191.0
+theme_override_styles/panel = ExtResource("1_flqya")
+
 [node name="LeftLabel" type="Label" parent="ChangePropertyBox"]
 layout_mode = 0
-offset_left = 49.0
-offset_top = 136.0
-offset_right = 145.0
-offset_bottom = 172.0
+offset_left = 80.0
+offset_top = 140.0
+offset_right = 176.0
+offset_bottom = 176.0
 text = "描述"
 label_settings = ExtResource("4_xh57f")
 
 [node name="RightLabel" type="Label" parent="ChangePropertyBox"]
 layout_mode = 0
-offset_left = 427.0
-offset_top = 137.0
-offset_right = 555.0
-offset_bottom = 173.0
+offset_left = 403.0
+offset_top = 146.0
+offset_right = 531.0
+offset_bottom = 182.0
 text = "描述"
 label_settings = ExtResource("4_xh57f")
 
@@ -102,10 +142,11 @@ text = "选哪个？"
 label_settings = ExtResource("4_xh57f")
 
 [node name="DownLabel" type="Label" parent="ChangePropertyBox"]
-offset_left = 241.0
-offset_top = 308.0
-offset_right = 337.0
-offset_bottom = 344.0
+layout_mode = 0
+offset_left = 239.0
+offset_top = 278.0
+offset_right = 335.0
+offset_bottom = 314.0
 text = "再想想"
 label_settings = ExtResource("4_xh57f")
 
@@ -113,50 +154,52 @@ label_settings = ExtResource("4_xh57f")
 layout_mode = 0
 offset_left = 371.0
 offset_top = 149.0
-offset_right = 421.0
-offset_bottom = 199.0
+offset_right = 371.0
+offset_bottom = 149.0
 rotation = 2.00702
 texture = ExtResource("6_i6vsl")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="ChangePropertyBox"]
+layout_mode = 0
 offset_left = 197.0
 offset_top = 164.0
-offset_right = 247.0
-offset_bottom = 214.0
+offset_right = 197.0
+offset_bottom = 164.0
 rotation = 5.13436
 texture = ExtResource("6_i6vsl")
 expand_mode = 1
 
 [node name="TextureRect3" type="TextureRect" parent="ChangePropertyBox"]
+layout_mode = 0
 offset_left = 292.0
 offset_top = 248.0
-offset_right = 342.0
-offset_bottom = 298.0
+offset_right = 292.0
+offset_bottom = 248.0
 rotation = 3.53237
 texture = ExtResource("6_i6vsl")
 expand_mode = 1
 
 [node name="PropertyTextureDown" type="Control" parent="ChangePropertyBox"]
 anchors_preset = 0
-offset_left = 263.0
-offset_top = 252.0
-offset_right = 303.0
-offset_bottom = 292.0
+offset_left = 245.0
+offset_top = 199.0
+offset_right = 320.0
+offset_bottom = 274.0
 
 [node name="PropertyTextureLeft" type="Control" parent="ChangePropertyBox"]
 anchors_preset = 0
-offset_left = 166.0
-offset_top = 133.0
-offset_right = 206.0
-offset_bottom = 173.0
+offset_left = 178.0
+offset_top = 129.0
+offset_right = 253.0
+offset_bottom = 204.0
 
 [node name="PropertyTextureRight" type="Control" parent="ChangePropertyBox"]
 anchors_preset = 0
-offset_left = 373.0
-offset_top = 141.0
-offset_right = 413.0
-offset_bottom = 181.0
+offset_left = 324.0
+offset_top = 128.0
+offset_right = 399.0
+offset_bottom = 203.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
