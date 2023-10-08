@@ -1,0 +1,372 @@
+[gd_scene load_steps=25 format=3 uid="uid://di3jfrboebmws"]
+
+[ext_resource type="Texture2D" uid="uid://b2g1q3cy5d6pk" path="res://assets/tilesets/floortileset.png" id="1_00j23"]
+[ext_resource type="Texture2D" uid="uid://cwgvd2gm3mkay" path="res://assets/character/rpg-character_transparent.png" id="2_nksxc"]
+[ext_resource type="Script" path="res://scripts/Character.gd" id="2_s1ruk"]
+[ext_resource type="Script" path="res://scripts/Grid.gd" id="3_x3dgk"]
+[ext_resource type="Texture2D" uid="uid://cyhy1o8ra1b7k" path="res://assets/highlight.png" id="5_38jlr"]
+[ext_resource type="Script" path="res://scripts/Class.gd" id="6_mgp7l"]
+[ext_resource type="Texture2D" uid="uid://dxlkpuq0r25cm" path="res://assets/character/rpg-character_icon.png" id="7_2lxbn"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1yaul"]
+texture = ExtResource("1_00j23")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_nvj5r"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_1yaul")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4mkwo"]
+size = Vector2(256, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b1wx6"]
+size = Vector2(256, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gb0eh"]
+size = Vector2(32, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x22e4"]
+size = Vector2(32, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fthmr"]
+size = Vector2(32, 32)
+
+[sub_resource type="Animation" id="Animation_wkgao"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+
+[sub_resource type="Animation" id="Animation_tur7y"]
+resource_name = "movedown"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_qt0q4"]
+resource_name = "moveleft"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_3o5bp"]
+resource_name = "moveright"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_ynk1y"]
+resource_name = "moveup"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jcjxj"]
+_data = {
+"RESET": SubResource("Animation_wkgao"),
+"movedown": SubResource("Animation_tur7y"),
+"moveleft": SubResource("Animation_qt0q4"),
+"moveright": SubResource("Animation_3o5bp"),
+"moveup": SubResource("Animation_ynk1y")
+}
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ddv83"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t8ydc"]
+bg_color = Color(0.6, 0.796078, 0.6, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwcxd"]
+bg_color = Color(0.6, 0.870588, 0.6, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v4142"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.815686, 0.815686, 0.815686, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Main" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_nvj5r")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 131072, 4, 65536, 131072, 4, 131072, 131072, 4, 196608, 131072, 4, 262144, 131072, 4, 327680, 131072, 4, 393216, 131072, 4, 1, 131072, 4, 65537, 0, 1, 131073, 0, 0, 196609, 0, 0, 262145, 0, 0, 327681, 0, 0, 393217, 0, 0, 2, 131072, 4, 65538, 0, 0, 131074, 0, 0, 196610, 0, 0, 262146, 0, 1, 327682, 0, 0, 393218, 0, 0, 3, 131072, 4, 65539, 0, 0, 131075, 0, 0, 196611, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 1, 4, 131072, 4, 65540, 0, 0, 131076, 0, 0, 196612, 0, 0, 262148, 0, 0, 327684, 0, 0, 393220, 0, 0, 5, 131072, 4, 65541, 0, 1, 131077, 0, 0, 196613, 0, 0, 262149, 0, 0, 327685, 0, 0, 393221, 0, 0, 6, 131072, 4, 65542, 0, 0, 131078, 0, 0, 196614, 0, 0, 262150, 0, 0, 327686, 0, 1, 393222, 0, 0, 458752, 131072, 4, 458753, 131072, 4, 458754, 131072, 4, 458755, 131072, 4, 458756, 131072, 4, 458757, 131072, 4, 458758, 131072, 4, 7, 131072, 4, 65543, 131072, 4, 131079, 131072, 4, 196615, 131072, 4, 262151, 131072, 4, 327687, 131072, 4, 393223, 131072, 4, 458759, 131072, 4)
+
+[node name="Clips" type="Area2D" parent="."]
+
+[node name="Bottom" type="CollisionShape2D" parent="Clips"]
+position = Vector2(128, 240)
+shape = SubResource("RectangleShape2D_4mkwo")
+
+[node name="Top" type="CollisionShape2D" parent="Clips"]
+position = Vector2(128, 16)
+shape = SubResource("RectangleShape2D_b1wx6")
+
+[node name="Right" type="CollisionShape2D" parent="Clips"]
+position = Vector2(240, 128)
+shape = SubResource("RectangleShape2D_gb0eh")
+
+[node name="Left" type="CollisionShape2D" parent="Clips"]
+position = Vector2(16, 128)
+shape = SubResource("RectangleShape2D_x22e4")
+
+[node name="Grid" type="Node2D" parent="."]
+z_index = 1
+z_as_relative = false
+script = ExtResource("3_x3dgk")
+
+[node name="Highlight" type="Sprite2D" parent="."]
+z_as_relative = false
+position = Vector2(192, 64)
+texture = ExtResource("5_38jlr")
+centered = false
+
+[node name="Character" type="Area2D" parent="."]
+z_index = 2
+z_as_relative = false
+position = Vector2(192, 64)
+script = ExtResource("2_s1ruk")
+speed = 6
+
+[node name="PointingRay" type="RayCast2D" parent="Character"]
+position = Vector2(16, 16)
+target_position = Vector2(0, 32)
+collide_with_areas = true
+
+[node name="Collision" type="CollisionShape2D" parent="Character"]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_fthmr")
+
+[node name="CharacterSprite" type="Sprite2D" parent="Character"]
+position = Vector2(0, -40)
+texture = ExtResource("2_nksxc")
+centered = false
+hframes = 4
+vframes = 4
+frame = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Character/CharacterSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_jcjxj")
+}
+
+[node name="TransformCamera" type="RemoteTransform2D" parent="Character"]
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(131, 128)
+zoom = Vector2(2.5, 2.5)
+
+[node name="Button" type="Button" parent="."]
+editor_description = "主动道具"
+offset_left = -117.0
+offset_top = 206.0
+offset_right = -40.0
+offset_bottom = 251.0
+theme_override_styles/normal = SubResource("StyleBoxLine_ddv83")
+text = "主动道具"
+
+[node name="Class" type="Node" parent="."]
+script = ExtResource("6_mgp7l")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Control"]
+offset_left = -94.0
+offset_top = 51.0
+offset_right = -12.0
+offset_bottom = 157.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_t8ydc")
+
+[node name="PlayerInfoBox2" type="Panel" parent="Control"]
+offset_left = 264.0
+offset_top = 2.0
+offset_right = 353.0
+offset_bottom = 42.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwcxd")
+
+[node name="AvatarFrame" type="Panel" parent="Control/PlayerInfoBox2"]
+layout_mode = 1
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 37.0
+offset_bottom = 30.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_v4142")
+
+[node name="TextureRect" type="TextureRect" parent="Control/PlayerInfoBox2/AvatarFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -12.5
+offset_right = 12.0
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_2lxbn")
+expand_mode = 1
+
+[node name="PlayerInfoBox" type="Panel" parent="Control"]
+offset_left = -95.0
+offset_top = 4.0
+offset_right = -11.0
+offset_bottom = 38.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lwcxd")
+
+[node name="AvatarFrame" type="Panel" parent="Control/PlayerInfoBox"]
+layout_mode = 1
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 37.0
+offset_bottom = 30.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_v4142")
+
+[node name="TextureRect" type="TextureRect" parent="Control/PlayerInfoBox/AvatarFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -12.5
+offset_right = 12.0
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_2lxbn")
+expand_mode = 1

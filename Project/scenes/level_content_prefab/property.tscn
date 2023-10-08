@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbngfs3vxsu6i"]
+
+[ext_resource type="Script" path="res://scripts/Property.gd" id="1_iklr0"]
+[ext_resource type="Texture2D" uid="uid://ued4jdi3wvgv" path="res://assets/临时资源/像素RPG游戏图标 装备物品道具武器素材 手游2D资源防具技能食物/普通物品/I_Book.png" id="2_th1mh"]
+
+[sub_resource type="Animation" id="Animation_1xg50"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_g7ga7"]
+resource_name = "get"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(25.1067, 1, 25.1067, 1, 25.1067, 1, 25.1067, 1),
+"update": 0,
+"values": [Color(3, 3, 3, 1), Color(1, 1, 1, 0), Color(3, 3, 3, 1), Color(1, 1, 1, 0), Color(3, 3, 3, 1), Color(1, 1, 1, 0), Color(3, 3, 3, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s7q1h"]
+_data = {
+"RESET": SubResource("Animation_1xg50"),
+"get": SubResource("Animation_g7ga7")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_28m1a"]
+size = Vector2(30, 30)
+
+[node name="Property" type="Area2D" groups=["CanGet", "Property"]]
+position = Vector2(126, 268)
+scale = Vector2(2, 2)
+script = ExtResource("1_iklr0")
+
+[node name="PropertySprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_th1mh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PropertySprite"]
+libraries = {
+"": SubResource("AnimationLibrary_s7q1h")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_28m1a")
