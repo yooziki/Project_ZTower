@@ -9,6 +9,7 @@ extends Area2D
 @export var LUCK = 2
 @export var DOG = 2
 @export var CRI = 2
+@onready var high_light = $/root/Main/Highlight
 
 signal  choose_eq(eq)
 var moving = false
@@ -18,7 +19,7 @@ var turnFirstFrame
 var pressed = []
 var attack_in_cd = false
 
-@onready var ui_manager = $"../Control"
+@onready var ui_manager = $"/root/Main/Control"
 @onready var ray_up = $PointingRayUp
 @onready var ray_down = $PointingRayDown
 @onready var ray_left = $PointingRayLeft
@@ -135,7 +136,7 @@ func attack_monster(monster,dir):
 	animator.play(player_anims_idle[dir])
 
 func move(dir):
-	$"../Highlight".position = position + inputs[dir] * Main_gd.tile_size	
+	high_light.position = position + inputs[dir] * Main_gd.tile_size	
 	var movementTween = get_tree().create_tween()
 	movementTween.tween_property(self, "position", position + inputs[dir] * Main_gd.tile_size, 0.8 / move_speed).set_trans(Tween.TRANS_LINEAR)
 	moving = true

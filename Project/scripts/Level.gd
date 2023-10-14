@@ -1,14 +1,39 @@
 extends Node2D
 var tilemap
+var room_id:int
+
 var eq_cell = Vector2(10,31)
 var hp_recover_cell = Vector2(11,31)
 var pp_cell = Vector2(12,31)
 var monster_cell = Vector2(13,31)
 var boss_cell = Vector2(13,31)
+var character_cell = Vector2(23,6)
+var next_floor_cell = Vector2(24,6)
+var stone_cell = Vector2(21,12)
+
+
 
 func create_monster(cell_position):
 	var position = cell_position * Main_gd.tile_size + Vector2i(Main_gd.tile_size/2, Main_gd.tile_size/2)
 	var new_node = load("res://scenes/level_content_prefab/monster.tscn").instantiate()
+	add_child(new_node)
+	new_node.position = position
+
+func create_character(cell_position):
+	var position = cell_position * Main_gd.tile_size
+	var new_node = load("res://scenes/level_content_prefab/character.tscn").instantiate()
+	add_child(new_node)
+	new_node.position = position
+	
+func create_next_floor(cell_position):
+	var position = cell_position * Main_gd.tile_size + Vector2i(Main_gd.tile_size/2, Main_gd.tile_size/2)
+	var new_node = load("res://scenes/level_content_prefab/next_floor.tscn").instantiate()
+	add_child(new_node)
+	new_node.position = position
+	
+func create_stone(cell_position):
+	var position = cell_position * Main_gd.tile_size + Vector2i(Main_gd.tile_size/2, Main_gd.tile_size/2)
+	var new_node = load("res://scenes/level_content_prefab/stone.tscn").instantiate()
 	add_child(new_node)
 	new_node.position = position
 
@@ -40,7 +65,7 @@ func create_eq(cell_position):
 	new_node.get_node("EquipmentSprite").texture = load("res://assets/临时资源/像素RPG游戏图标 装备物品道具武器素材 手游2D资源防具技能食物/"+new_node.self_data.icon)
 	new_node.position = position
 
-func _ready():
+func create_room():
 	tilemap = $TileMap
 	print("tilemap的ID****"+str(tilemap.get_used_cells_by_id(1,-1,monster_cell,-1)))
 	var monster_array = tilemap.get_used_cells_by_id(1,-1,monster_cell,-1)
@@ -55,7 +80,22 @@ func _ready():
 	var pp_array = tilemap.get_used_cells_by_id(1,-1,pp_cell,-1)
 	for i in pp_array:
 		create_property(i)
+	var stone_array = tilemap.get_used_cells_by_id(1,-1,stone_cell,-1)
+	for i in stone_array:
+		create_stone(i)
+	var cell_array = tilemap.get_used_cells_by_id(1,-1,next_floor_cell,-1)
+	for i in cell_array:
+		create_next_floor(i)		
+	var chara_array = tilemap.get_used_cells_by_id(1,-1,character_cell,-1)
+	for i in chara_array:
+		create_character(i)
 	tilemap.clear_layer(1)
+
+func _ready():
+	var next_level = Main_gd.level_array[Main_gd.current_level]
+	var next_level_node = load("res://scenes/level_data/"+str(next_level)+".tscn").instantiate()
+	add_child(next_level_node)
+	create_room()
 
 func random_equipment_rare():
 	var all_weight = Main_gd.equipment_rare_weight[-1]

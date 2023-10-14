@@ -10,7 +10,7 @@ func try_get(chara):
 	Main_gd.player_control = false
 	control.add_child(change_pp_node)
 	change_pp_node.get_node("AnimationPlayer").play("FadeIn")
-	var character_sprite = $/root/Main/Character/CharacterSprite.duplicate()
+	var character_sprite = $/root/Main/Level/Character/CharacterSprite.duplicate()
 	character_sprite.name = "character_sprite"
 	change_pp_node.get_node("Character").add_child(character_sprite)
 	queue_free()	

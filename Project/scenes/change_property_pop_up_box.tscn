@@ -86,6 +86,7 @@ offset_right = 37.0
 offset_bottom = 49.0
 
 [node name="Panel3" type="Panel" parent="ChangePropertyBox/GridPanel"]
+layout_mode = 0
 offset_left = 249.0
 offset_top = 188.0
 offset_right = 324.0
@@ -93,6 +94,7 @@ offset_bottom = 263.0
 theme_override_styles/panel = ExtResource("1_flqya")
 
 [node name="Panel6" type="Panel" parent="ChangePropertyBox/GridPanel"]
+layout_mode = 0
 offset_left = 323.0
 offset_top = 117.0
 offset_right = 398.0
@@ -100,6 +102,7 @@ offset_bottom = 192.0
 theme_override_styles/panel = ExtResource("1_flqya")
 
 [node name="Panel5" type="Panel" parent="ChangePropertyBox/GridPanel"]
+layout_mode = 0
 offset_left = 250.0
 offset_top = 117.0
 offset_right = 325.0
