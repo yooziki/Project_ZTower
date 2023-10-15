@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1ocw21be3t3w"]
+
+[ext_resource type="StyleBox" uid="uid://bob4v5lfr2uyv" path="res://scenes/BlackAndWhite.tres" id="1_emw4w"]
+[ext_resource type="LabelSettings" uid="uid://dtlee2oottm2v" path="res://scenes/NormalLabelSetting.tres" id="3_c6la8"]
+[ext_resource type="Texture2D" uid="uid://cv4swkf8f7egq" path="res://assets/临时资源/像素RPG游戏图标 装备物品道具武器素材 手游2D资源防具技能食物/武器/icon_03.png" id="4_vwbrx"]
+[ext_resource type="LabelSettings" uid="uid://debsfgvwloi8d" path="res://scenes/SmallLabelSetting.tres" id="5_fqok3"]
+[ext_resource type="FontFile" uid="uid://bpevby5jsckb8" path="res://assets/font/ark-pixel-12px-monospaced-zh_cn.ttf" id="6_y2xh6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_87a0b"]
+line_spacing = 1.0
+font = ExtResource("6_y2xh6")
+font_size = 15
+outline_size = 1
+
+[node name="EqPanel" type="Panel"]
+offset_left = -139.0
+offset_top = 56.0
+offset_right = 33.0
+offset_bottom = 216.0
+theme_override_styles/panel = ExtResource("1_emw4w")
+
+[node name="IconPP1" type="TextureRect" parent="."]
+modulate = Color(1, 0.156863, 0, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 9.0
+offset_top = 46.0
+offset_right = 33.0
+offset_bottom = 70.0
+expand_mode = 1
+
+[node name="LabelPP1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 43.0
+offset_right = 77.0
+offset_bottom = 79.0
+label_settings = ExtResource("3_c6la8")
+
+[node name="IconEq" type="Sprite2D" parent="."]
+position = Vector2(26, 25)
+texture = ExtResource("4_vwbrx")
+
+[node name="LabelEqName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 13.0
+offset_right = 88.0
+offset_bottom = 36.0
+text = "武器名称"
+label_settings = ExtResource("5_fqok3")
+
+[node name="LabelEqDes" type="Label" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 81.0
+offset_right = 161.0
+offset_bottom = 155.0
+text = "攻击亡灵系敌人时额外造成3伤害"
+label_settings = SubResource("LabelSettings_87a0b")
+autowrap_mode = 1
+clip_text = true
+
+[node name="IconPP2" type="TextureRect" parent="."]
+modulate = Color(1, 0.156863, 0, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 59.0
+offset_top = 47.0
+offset_right = 83.0
+offset_bottom = 71.0
+expand_mode = 1
+
+[node name="LabelPP2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 44.0
+offset_right = 127.0
+offset_bottom = 80.0
+label_settings = ExtResource("3_c6la8")
+
+[node name="IconPP3" type="TextureRect" parent="."]
+modulate = Color(1, 0.156863, 0, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 109.0
+offset_top = 47.0
+offset_right = 133.0
+offset_bottom = 71.0
+expand_mode = 1
+
+[node name="LabelPP3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 44.0
+offset_right = 177.0
+offset_bottom = 80.0
+label_settings = ExtResource("3_c6la8")

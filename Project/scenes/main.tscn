@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://di3jfrboebmws"]
+[gd_scene load_steps=28 format=3 uid="uid://di3jfrboebmws"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_e4qtw"]
 [ext_resource type="Script" path="res://scripts/Level.gd" id="2_c5o1y"]
@@ -18,6 +18,7 @@
 [ext_resource type="LabelSettings" uid="uid://debsfgvwloi8d" path="res://scenes/SmallLabelSetting.tres" id="15_8vrk2"]
 [ext_resource type="Texture2D" uid="uid://do103gbf2nugs" path="res://assets/icon/value/hearts.svg" id="15_ecdta"]
 [ext_resource type="FontFile" uid="uid://domtnkn4bon4p" path="res://assets/font/ark-pixel-10px-monospaced-ja.otf" id="15_lgbpk"]
+[ext_resource type="PackedScene" uid="uid://c1ocw21be3t3w" path="res://scenes/ui_prefab/eq_panel.tscn" id="16_vwf6j"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_ddv83"]
 
@@ -44,6 +45,21 @@ outline_size = 1
 [sub_resource type="LabelSettings" id="LabelSettings_bj1or"]
 font = ExtResource("15_lgbpk")
 
+[sub_resource type="Animation" id="Animation_22hks"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("YouWinBox:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -300)]
+}
+
 [sub_resource type="Animation" id="Animation_cb2wj"]
 resource_name = "YouWin"
 length = 5.0
@@ -60,21 +76,6 @@ tracks/0/keys = {
 "values": [Vector2(0, -300), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_22hks"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("YouWinBox:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -300)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xrax2"]
 _data = {
 "RESET": SubResource("Animation_22hks"),
@@ -88,26 +89,26 @@ script = ExtResource("1_e4qtw")
 z_index = 2
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1000.0
+offset_bottom = 800.0
 script = ExtResource("6_2dql0")
 
 [node name="UseItem" type="Button" parent="Control"]
 editor_description = "主动道具"
 layout_mode = 0
-offset_left = -192.0
-offset_top = 422.0
-offset_right = -95.0
-offset_bottom = 498.0
+offset_left = 75.0
+offset_top = 546.0
+offset_right = 172.0
+offset_bottom = 622.0
 theme_override_styles/normal = SubResource("StyleBoxLine_ddv83")
 text = "主动道具"
 
 [node name="MonsterInfoBox" type="Panel" parent="Control"]
 layout_mode = 0
-offset_left = 554.0
-offset_top = 22.0
-offset_right = 643.0
-offset_bottom = 62.0
+offset_left = 821.0
+offset_top = 146.0
+offset_right = 910.0
+offset_bottom = 186.0
 theme_override_styles/panel = ExtResource("6_2nd7x")
 
 [node name="AvatarFrame" type="Panel" parent="Control/MonsterInfoBox"]
@@ -136,10 +137,10 @@ expand_mode = 1
 
 [node name="PlayerValueBox" type="Panel" parent="Control"]
 layout_mode = 0
-offset_left = 156.0
-offset_top = -15.0
-offset_right = 495.0
-offset_bottom = 31.0
+offset_left = 423.0
+offset_top = 109.0
+offset_right = 762.0
+offset_bottom = 155.0
 theme_override_styles/panel = ExtResource("6_2nd7x")
 
 [node name="IconATT" type="TextureRect" parent="Control/PlayerValueBox"]
@@ -264,10 +265,10 @@ label_settings = ExtResource("9_4acap")
 
 [node name="PlayerInfoBox" type="Panel" parent="Control"]
 layout_mode = 0
-offset_left = -14.0
-offset_top = -20.0
-offset_right = 153.0
-offset_bottom = 37.0
+offset_left = 253.0
+offset_top = 104.0
+offset_right = 420.0
+offset_bottom = 161.0
 theme_override_styles/panel = ExtResource("6_2nd7x")
 
 [node name="AvatarFrame" type="Panel" parent="Control/PlayerInfoBox"]
@@ -316,10 +317,10 @@ label_settings = ExtResource("9_4acap")
 
 [node name="PlayerEqBox" type="Panel" parent="Control"]
 layout_mode = 0
-offset_left = -202.0
-offset_top = 31.0
-offset_right = -119.0
-offset_bottom = 365.0
+offset_left = 65.0
+offset_top = 155.0
+offset_right = 148.0
+offset_bottom = 489.0
 
 [node name="Eq_1" type="Panel" parent="Control/PlayerEqBox"]
 layout_mode = 0
@@ -456,6 +457,13 @@ offset_bottom = 34.0
 text = "饰品"
 label_settings = SubResource("LabelSettings_bj1or")
 
+[node name="EqDesBox" parent="Control/PlayerEqBox" instance=ExtResource("16_vwf6j")]
+layout_mode = 0
+offset_left = -402.0
+offset_top = -39.0
+offset_right = -230.0
+offset_bottom = 121.0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Control"]
 libraries = {
 "": SubResource("AnimationLibrary_xrax2")
@@ -476,21 +484,42 @@ text = "“看看你的脚下。天下所有高手己成为任你践踏之物。
 来吧！抬起头来，展开你的手。拥抱着属于你的一切，振臂高呼吧！”"
 label_settings = ExtResource("15_8vrk2")
 
+[node name="HPChangeBox" type="Control" parent="Control"]
+anchors_preset = 0
+offset_left = 267.0
+offset_top = 124.0
+offset_right = 307.0
+offset_bottom = 164.0
+
 [node name="Level" type="Node2D" parent="."]
+position = Vector2(267, 124)
 script = ExtResource("2_c5o1y")
 
 [node name="Grid" type="Node2D" parent="."]
 z_index = 1
 z_as_relative = false
+position = Vector2(267, 124)
 script = ExtResource("3_x3dgk")
 
 [node name="Highlight" type="Sprite2D" parent="."]
 z_as_relative = false
-position = Vector2(192, 64)
+position = Vector2(1239, 84)
 scale = Vector2(2, 2)
 texture = ExtResource("5_38jlr")
 centered = false
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(260, 252)
+position = Vector2(527, 376)
 zoom = Vector2(1.2, 1.2)
+
+[connection signal="mouse_entered" from="Control/PlayerEqBox/Eq_1" to="Control" method="_on_eq_1_mouse_entered"]
+[connection signal="mouse_exited" from="Control/PlayerEqBox/Eq_1" to="Control" method="_on_eq_1_mouse_exited"]
+[connection signal="mouse_entered" from="Control/PlayerEqBox/Eq_1/Panel" to="Control" method="_on_panel_mouse_entered"]
+[connection signal="mouse_entered" from="Control/PlayerEqBox/Eq_2" to="Control" method="_on_eq_2_mouse_entered"]
+[connection signal="mouse_exited" from="Control/PlayerEqBox/Eq_2" to="Control" method="_on_eq_2_mouse_exited"]
+[connection signal="mouse_entered" from="Control/PlayerEqBox/Eq_3" to="Control" method="_on_eq_3_mouse_entered"]
+[connection signal="mouse_exited" from="Control/PlayerEqBox/Eq_3" to="Control" method="_on_eq_3_mouse_exited"]
+[connection signal="mouse_entered" from="Control/PlayerEqBox/Eq_4" to="Control" method="_on_eq_4_mouse_entered"]
+[connection signal="mouse_exited" from="Control/PlayerEqBox/Eq_4" to="Control" method="_on_eq_4_mouse_exited"]
+[connection signal="mouse_entered" from="Control/PlayerEqBox/Eq_5" to="Control" method="_on_eq_5_mouse_entered"]
+[connection signal="mouse_exited" from="Control/PlayerEqBox/Eq_5" to="Control" method="_on_eq_5_mouse_exited"]

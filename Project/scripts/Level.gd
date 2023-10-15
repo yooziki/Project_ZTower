@@ -20,7 +20,7 @@ func create_monster(cell_position):
 	new_node.position = position
 
 func create_character(cell_position):
-	var position = cell_position * Main_gd.tile_size
+	var position = cell_position * Main_gd.tile_size + Vector2i(Main_gd.tile_size/2, Main_gd.tile_size/2)
 	var new_node = load("res://scenes/level_content_prefab/character.tscn").instantiate()
 	add_child(new_node)
 	new_node.position = position
