@@ -3,8 +3,13 @@ extends CharacterBody2D
 var HP: int
 var ATT: int
 var SPD: int
+var CRI: int
 var DEF: int
+var DOG: int
 var NAME: String
+var rng = RandomNumberGenerator.new()
+
+var CRI_times = 2
 @onready var animator = $MonsterSprite/AnimationPlayer
 @onready var ui_manager = $"/root/Main/Control"
 var monster_anims_attack = {
@@ -22,12 +27,34 @@ func put_on_map():
 	sprite.position.y = 200
 	return sprite
 
+func battle_turn(attacker, be_attacker):
+	var is_DOG = false
+	var is_CRI = false
+	var damage = 0
+	if be_attacker.DOG >= rng.randi_range(0, 100):
+		is_DOG = true
+		be_attacker.animator.play("dodged")
+		await be_attacker.animator.animation_finished
+	else:
+		is_DOG = false
+		if attacker.CRI >= rng.randi_range(0, 100):
+			is_CRI = true
+			damage = maxi(attacker.ATT*attacker.CRI_times  - be_attacker.DEF,0)
+			be_attacker.HP -= damage
+		else:
+			is_CRI = false
+			damage = maxi(attacker.ATT - be_attacker.DEF,0)
+			be_attacker.HP -= damage
+		be_attacker.animator.play("attacked")
+	print("跳字一次："+str(is_DOG))
+	ui_manager.HP_change_animation(be_attacker, is_DOG, is_CRI, damage)	
+
 func attacked(player,movement_direction):
-	HP -= player.ATT
+	battle_turn(player,self)
 	refresh_ui()
 	if HP > 0:
 		animator.play("Attacked")
-		attack_player(player,movement_direction)
+		# attack_player(player,movement_direction)
 		pass
 	else:
 		animator.play("dead")
@@ -41,11 +68,12 @@ func refresh_ui():
 	pass
 
 func attack_player(player,dir):
-	await animator.animation_finished
+	#await animator.animation_finished
 	animator.play(monster_anims_attack[dir])	
-	player.animator.play("attacked")
-	await animator.animation_finished	
-	player.HP -= ATT
+
+	await animator.animation_finished
+	battle_turn(self,player)
+		
 	ui_manager.refresh_ui(player)
 	animator.play("idle_down")
 	pass
@@ -55,6 +83,7 @@ func _ready():
 	print("创建 Monster："+name)
 	HP = 15
 	ATT = 2
+	SPD = 100
 	$Control/BarHP.min_value = 0
 	$Control/BarHP.max_value = HP	
 	$MonsterSprite.position = Vector2(-0,0)

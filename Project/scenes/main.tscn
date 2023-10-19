@@ -1,9 +1,7 @@
-[gd_scene load_steps=42 format=3 uid="uid://di3jfrboebmws"]
+[gd_scene load_steps=28 format=3 uid="uid://di3jfrboebmws"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_e4qtw"]
-[ext_resource type="TileSet" uid="uid://cnpuw21l8ntc6" path="res://scenes/ground_tile.tres" id="1_l3u7j"]
 [ext_resource type="Script" path="res://scripts/Level.gd" id="2_c5o1y"]
-[ext_resource type="Script" path="res://scripts/Character.gd" id="2_s1ruk"]
 [ext_resource type="Script" path="res://scripts/Grid.gd" id="3_x3dgk"]
 [ext_resource type="Texture2D" uid="uid://cyhy1o8ra1b7k" path="res://assets/highlight.png" id="5_38jlr"]
 [ext_resource type="Script" path="res://scripts/UIManager.gd" id="6_2dql0"]
@@ -17,9 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://dt70b2md2ckap" path="res://assets/icon/value/clover.svg" id="12_kkghs"]
 [ext_resource type="Texture2D" uid="uid://bxui501eh6xrj" path="res://assets/icon/value/bullseye.svg" id="13_i3cql"]
 [ext_resource type="Texture2D" uid="uid://bjnodbb1crchv" path="res://assets/icon/value/dodging.svg" id="14_i6yk7"]
+[ext_resource type="LabelSettings" uid="uid://debsfgvwloi8d" path="res://scenes/SmallLabelSetting.tres" id="15_8vrk2"]
 [ext_resource type="Texture2D" uid="uid://do103gbf2nugs" path="res://assets/icon/value/hearts.svg" id="15_ecdta"]
 [ext_resource type="FontFile" uid="uid://domtnkn4bon4p" path="res://assets/font/ark-pixel-10px-monospaced-ja.otf" id="15_lgbpk"]
-[ext_resource type="Texture2D" uid="uid://v7jncct86053" path="res://assets/临时资源/character/48x48/Heroes/Hero 02 48.png" id="27_15cf0"]
+[ext_resource type="PackedScene" uid="uid://c1ocw21be3t3w" path="res://scenes/ui_prefab/eq_panel.tscn" id="16_vwf6j"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_ddv83"]
 
@@ -46,375 +45,70 @@ outline_size = 1
 [sub_resource type="LabelSettings" id="LabelSettings_bj1or"]
 font = ExtResource("15_lgbpk")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fthmr"]
-size = Vector2(5, 5)
-
-[sub_resource type="Animation" id="Animation_wkgao"]
+[sub_resource type="Animation" id="Animation_22hks"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("YouWinBox:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, -300)]
 }
 
-[sub_resource type="Animation" id="Animation_fdl72"]
-resource_name = "attack_down"
-length = 1.2
-step = 0.05
+[sub_resource type="Animation" id="Animation_cb2wj"]
+resource_name = "YouWin"
+length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("YouWinBox:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [65, 67, 68, 70]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 10), Vector2(0, 0)]
+"values": [Vector2(0, -300), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_80o5x"]
-resource_name = "attack_left"
-length = 1.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [119, 117, 123, 121]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(-10, 0), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_to1go"]
-resource_name = "attack_right"
-length = 1.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [96, 98, 108, 110]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(10, 0), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_auatr"]
-resource_name = "attack_up"
-length = 1.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [88, 90, 93, 95]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_k5or7"]
-resource_name = "attacked"
-length = 1.7
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_0bnn5"]
-resource_name = "idle"
-length = 2.8
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7, 1.4, 2.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-
-[sub_resource type="Animation" id="Animation_xkr80"]
-resource_name = "idle_left"
-length = 2.8
-loop_mode = 1
-step = 0.7
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7, 1.4, 2.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [8, 9, 10, 11]
-}
-
-[sub_resource type="Animation" id="Animation_gxpae"]
-resource_name = "idle_right"
-length = 2.8
-loop_mode = 1
-step = 0.7
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7, 1.4, 2.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [16, 17, 18, 19]
-}
-
-[sub_resource type="Animation" id="Animation_2j1uc"]
-resource_name = "idle_up"
-length = 2.8
-loop_mode = 1
-step = 0.7
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7, 1.4, 2.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [24, 25, 26, 27]
-}
-
-[sub_resource type="Animation" id="Animation_tur7y"]
-resource_name = "movedown"
-length = 1.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [32, 33, 34, 35]
-}
-
-[sub_resource type="Animation" id="Animation_gpvt7"]
-resource_name = "move_left"
-length = 1.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [40, 41, 42, 43]
-}
-
-[sub_resource type="Animation" id="Animation_h0rsj"]
-resource_name = "move_right"
-length = 1.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [48, 49, 50, 51]
-}
-
-[sub_resource type="Animation" id="Animation_ba68x"]
-resource_name = "move_up"
-length = 1.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [56, 57, 58, 59]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jcjxj"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xrax2"]
 _data = {
-"RESET": SubResource("Animation_wkgao"),
-"attack_down": SubResource("Animation_fdl72"),
-"attack_left": SubResource("Animation_80o5x"),
-"attack_right": SubResource("Animation_to1go"),
-"attack_up": SubResource("Animation_auatr"),
-"attacked": SubResource("Animation_k5or7"),
-"idle_down": SubResource("Animation_0bnn5"),
-"idle_left": SubResource("Animation_xkr80"),
-"idle_right": SubResource("Animation_gxpae"),
-"idle_up": SubResource("Animation_2j1uc"),
-"move_down": SubResource("Animation_tur7y"),
-"move_left": SubResource("Animation_gpvt7"),
-"move_right": SubResource("Animation_h0rsj"),
-"move_up": SubResource("Animation_ba68x")
+"RESET": SubResource("Animation_22hks"),
+"YouWin": SubResource("Animation_cb2wj")
 }
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_e4qtw")
 
-[node name="Level" type="Node2D" parent="."]
-script = ExtResource("2_c5o1y")
-
-[node name="TileMap" type="TileMap" parent="Level"]
-scale = Vector2(4, 4)
-tile_set = ExtResource("1_l3u7j")
-format = 2
-layer_0/tile_data = PackedInt32Array(0, 196608, 0, 65536, 196608, 1, 131072, 196608, 1, 196608, 196608, 1, 262144, 196608, 1, 327680, 196608, 1, 393216, 196608, 1, 1, 262144, 0, 65537, 262144, 1, 131073, 262144, 1, 196609, 262144, 1, 262145, 262144, 1, 327681, 262144, 1, 393217, 262144, 1, 2, 262144, 0, 65538, 262144, 1, 131074, 262144, 1, 196610, 262144, 1, 262146, 262144, 1, 327682, 262144, 1, 393218, 262144, 1, 3, 262144, 0, 65539, 262144, 1, 131075, 262144, 1, 196611, 262144, 1, 262147, 262144, 1, 327683, 262144, 1, 393219, 262144, 1, 4, 262144, 0, 65540, 262144, 1, 131076, 262144, 1, 196612, 262144, 1, 262148, 262144, 1, 327684, 262144, 1, 393220, 262144, 1, 5, 262144, 0, 65541, 262144, 1, 131077, 262144, 1, 196613, 262144, 1, 262149, 262144, 1, 327685, 262144, 1, 393221, 262144, 1, 6, 262144, 0, 65542, 262144, 1, 131078, 262144, 1, 196614, 262144, 1, 262150, 262144, 1, 327686, 262144, 1, 393222, 262144, 1, 458752, 196608, 2, 458753, 262144, 2, 458754, 262144, 2, 458755, 262144, 2, 458756, 262144, 2, 458757, 262144, 2, 458758, 262144, 2, 7, 327680, 0, 65543, 327680, 1, 131079, 327680, 1, 196615, 327680, 1, 262151, 327680, 1, 327687, 327680, 1, 393223, 327680, 1, 458759, 327680, 2)
-layer_1/name = ""
-layer_1/enabled = true
-layer_1/modulate = Color(1, 1, 1, 1)
-layer_1/y_sort_enabled = false
-layer_1/y_sort_origin = 0
-layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(65539, 1048576, 3, 327681, 655360, 31, 393219, 1048576, 3, 327686, 655360, 31, 196614, 655360, 31, 262150, 655360, 31, 327683, 720896, 31, 131076, 786432, 31, 65540, 786432, 31, 196609, 655360, 31, 393220, 851968, 31, 393221, 851968, 31, 393222, 851968, 31, 131078, 851968, 31, 65542, 851968, 31, 65541, 851968, 31, 262145, 655360, 31, 131075, 786432, 31, 196613, 851968, 31, 262149, 851968, 31, 327685, 851968, 31, 196610, 655360, 31, 262146, 655360, 31, 327682, 655360, 31, 262147, 655360, 31, 196611, 655360, 31)
-
-[node name="Grid" type="Node2D" parent="."]
-z_index = 1
-z_as_relative = false
-script = ExtResource("3_x3dgk")
-
-[node name="Highlight" type="Sprite2D" parent="."]
-z_as_relative = false
-position = Vector2(192, 64)
-scale = Vector2(2, 2)
-texture = ExtResource("5_38jlr")
-centered = false
-
 [node name="Control" type="Control" parent="."]
 z_index = 2
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1000.0
+offset_bottom = 800.0
 script = ExtResource("6_2dql0")
 
 [node name="UseItem" type="Button" parent="Control"]
 editor_description = "主动道具"
 layout_mode = 0
-offset_left = -192.0
-offset_top = 422.0
-offset_right = -95.0
-offset_bottom = 498.0
+offset_left = 75.0
+offset_top = 546.0
+offset_right = 172.0
+offset_bottom = 622.0
 theme_override_styles/normal = SubResource("StyleBoxLine_ddv83")
 text = "主动道具"
 
 [node name="MonsterInfoBox" type="Panel" parent="Control"]
 layout_mode = 0
-offset_left = 554.0
-offset_top = 22.0
-offset_right = 643.0
-offset_bottom = 62.0
+offset_left = 821.0
+offset_top = 146.0
+offset_right = 910.0
+offset_bottom = 186.0
 theme_override_styles/panel = ExtResource("6_2nd7x")
 
 [node name="AvatarFrame" type="Panel" parent="Control/MonsterInfoBox"]
@@ -443,10 +137,10 @@ expand_mode = 1
 
 [node name="PlayerValueBox" type="Panel" parent="Control"]
 layout_mode = 0
-offset_left = 156.0
-offset_top = -15.0
-offset_right = 495.0
-offset_bottom = 31.0
+offset_left = 423.0
+offset_top = 109.0
+offset_right = 762.0
+offset_bottom = 155.0
 theme_override_styles/panel = ExtResource("6_2nd7x")
 
 [node name="IconATT" type="TextureRect" parent="Control/PlayerValueBox"]
@@ -571,10 +265,10 @@ label_settings = ExtResource("9_4acap")
 
 [node name="PlayerInfoBox" type="Panel" parent="Control"]
 layout_mode = 0
-offset_left = -14.0
-offset_top = -20.0
-offset_right = 153.0
-offset_bottom = 37.0
+offset_left = 253.0
+offset_top = 104.0
+offset_right = 420.0
+offset_bottom = 161.0
 theme_override_styles/panel = ExtResource("6_2nd7x")
 
 [node name="AvatarFrame" type="Panel" parent="Control/PlayerInfoBox"]
@@ -623,10 +317,10 @@ label_settings = ExtResource("9_4acap")
 
 [node name="PlayerEqBox" type="Panel" parent="Control"]
 layout_mode = 0
-offset_left = -202.0
-offset_top = 31.0
-offset_right = -119.0
-offset_bottom = 365.0
+offset_left = 65.0
+offset_top = 155.0
+offset_right = 148.0
+offset_bottom = 489.0
 
 [node name="Eq_1" type="Panel" parent="Control/PlayerEqBox"]
 layout_mode = 0
@@ -763,72 +457,69 @@ offset_bottom = 34.0
 text = "饰品"
 label_settings = SubResource("LabelSettings_bj1or")
 
-[node name="Character" type="Area2D" parent="."]
-z_index = 2
-z_as_relative = false
-position = Vector2(64, 64)
-scale = Vector2(2, 2)
-collision_layer = 31
-collision_mask = 31
-script = ExtResource("2_s1ruk")
-move_speed = 6
-HP = 10
-MAXHP = 10
-ATT = 3
-DEF = 0
-LUCK = 0
-DOG = 5
-CRI = 5
+[node name="EqDesBox" parent="Control/PlayerEqBox" instance=ExtResource("16_vwf6j")]
+layout_mode = 0
+offset_left = -402.0
+offset_top = -39.0
+offset_right = -230.0
+offset_bottom = 121.0
 
-[node name="Collision" type="CollisionShape2D" parent="Character"]
-position = Vector2(16, 16)
-shape = SubResource("RectangleShape2D_fthmr")
-
-[node name="CharacterSprite" type="Sprite2D" parent="Character"]
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("27_15cf0")
-offset = Vector2(27, 20)
-hframes = 8
-vframes = 16
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Character/CharacterSprite"]
-autoplay = "RESET"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control"]
 libraries = {
-"": SubResource("AnimationLibrary_jcjxj")
+"": SubResource("AnimationLibrary_xrax2")
 }
 
-[node name="TransformCamera" type="RemoteTransform2D" parent="Character"]
+[node name="YouWinBox" type="Panel" parent="Control"]
+layout_mode = 0
+offset_top = -300.0
+offset_bottom = -300.0
 
-[node name="PointingRayLeft" type="RayCast2D" parent="Character"]
-position = Vector2(16, 16)
-target_position = Vector2(-32, 0)
-collision_mask = 31
-collide_with_areas = true
+[node name="Label" type="Label" parent="Control/YouWinBox"]
+layout_mode = 0
+offset_left = -218.0
+offset_top = 208.0
+offset_right = 1027.0
+offset_bottom = 289.0
+text = "“看看你的脚下。天下所有高手己成为任你践踏之物。他们每一个都在害怕你、尊敬你。你是世上最强的人！
+来吧！抬起头来，展开你的手。拥抱着属于你的一切，振臂高呼吧！”"
+label_settings = ExtResource("15_8vrk2")
 
-[node name="PointingRayUp" type="RayCast2D" parent="Character"]
-position = Vector2(16, 16)
-target_position = Vector2(0, -32)
-collision_mask = 31
-collide_with_areas = true
+[node name="HPChangeBox" type="Control" parent="Control"]
+anchors_preset = 0
+offset_left = 267.0
+offset_top = 124.0
+offset_right = 307.0
+offset_bottom = 164.0
 
-[node name="PointingRayDown" type="RayCast2D" parent="Character"]
-position = Vector2(16, 16)
-target_position = Vector2(0, 32)
-collision_mask = 31
-collide_with_areas = true
+[node name="Level" type="Node2D" parent="."]
+position = Vector2(267, 124)
+script = ExtResource("2_c5o1y")
 
-[node name="PointingRayRight" type="RayCast2D" parent="Character"]
-position = Vector2(16, 16)
-target_position = Vector2(32, 0)
-collision_mask = 31
-collide_with_areas = true
+[node name="Grid" type="Node2D" parent="."]
+z_index = 1
+z_as_relative = false
+position = Vector2(267, 124)
+script = ExtResource("3_x3dgk")
 
-[node name="AttackCD" type="Timer" parent="Character"]
-wait_time = 0.5
-one_shot = true
+[node name="Highlight" type="Sprite2D" parent="."]
+z_as_relative = false
+position = Vector2(1239, 84)
+scale = Vector2(2, 2)
+texture = ExtResource("5_38jlr")
+centered = false
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(260, 252)
+position = Vector2(527, 376)
 zoom = Vector2(1.2, 1.2)
 
-[connection signal="timeout" from="Character/AttackCD" to="Character" method="_on_attack_cd_timeout"]
+[connection signal="mouse_entered" from="Control/PlayerEqBox/Eq_1" to="Control" method="_on_eq_1_mouse_entered"]
+[connection signal="mouse_exited" from="Control/PlayerEqBox/Eq_1" to="Control" method="_on_eq_1_mouse_exited"]
+[connection signal="mouse_entered" from="Control/PlayerEqBox/Eq_1/Panel" to="Control" method="_on_panel_mouse_entered"]
+[connection signal="mouse_entered" from="Control/PlayerEqBox/Eq_2" to="Control" method="_on_eq_2_mouse_entered"]
+[connection signal="mouse_exited" from="Control/PlayerEqBox/Eq_2" to="Control" method="_on_eq_2_mouse_exited"]
+[connection signal="mouse_entered" from="Control/PlayerEqBox/Eq_3" to="Control" method="_on_eq_3_mouse_entered"]
+[connection signal="mouse_exited" from="Control/PlayerEqBox/Eq_3" to="Control" method="_on_eq_3_mouse_exited"]
+[connection signal="mouse_entered" from="Control/PlayerEqBox/Eq_4" to="Control" method="_on_eq_4_mouse_entered"]
+[connection signal="mouse_exited" from="Control/PlayerEqBox/Eq_4" to="Control" method="_on_eq_4_mouse_exited"]
+[connection signal="mouse_entered" from="Control/PlayerEqBox/Eq_5" to="Control" method="_on_eq_5_mouse_entered"]
+[connection signal="mouse_exited" from="Control/PlayerEqBox/Eq_5" to="Control" method="_on_eq_5_mouse_exited"]

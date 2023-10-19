@@ -63,7 +63,7 @@ func change_equipment(eq_id):
 	Main_gd.player_control = false
 	control.add_child(change_eq_node)
 	change_eq_node.get_node("AnimationPlayer").play("FadeIn")
-	var character_sprite = $/root/Main/Character/CharacterSprite.duplicate()
+	var character_sprite = $/root/Main/Level/Character/CharacterSprite.duplicate()
 	character_sprite.name = "character_sprite"
 	change_eq_node.get_node("Character").add_child(character_sprite)
 	change_eq_node.get_node("ChangeEquipmentBox/SourceDes").text = Main_gd.eq_slot[eq_data[eq_id].slotID].self_data.des

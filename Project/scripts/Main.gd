@@ -9,9 +9,9 @@ var is_property_change = false
 var equipment_rare_list:Array[Array] = [[],[],[],[]]
 var equipment_rare_weight = [40,70,85,90]
 var tile_size = 64
+var level_array = []
+var current_level = 0
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	#武器稀有度分组
 	print(Settings.equipementConfig.data)
@@ -23,6 +23,14 @@ func _ready():
 		equipment_rare_list[eq_data[i].rare-1].append(eq_data[i])
 	pass
 	print(equipment_rare_list)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	level_id_random()
+
+func level_id_random():
+	var level_data = Settings.levelConfig.data
+	for i in Settings.levelConfig.data:
+		print(i)
+		level_array.append(level_data[i].levelPool.pick_random())
+	print("随机关卡完成："+str(level_array))	
+
 func _process(delta):
 	pass
