@@ -21,6 +21,7 @@ Settings="*res://data/excel_export/settings.gd"
 Main_gd="*res://scripts/Main.gd"
 Buff_gd="*res://scripts/Buff.gd"
 Equipment_gd="*res://scripts/Equipment.gd"
+UI_gd="*res://scripts/UIManager.gd"
 
 [display]
 

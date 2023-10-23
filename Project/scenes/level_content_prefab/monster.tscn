@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://crl3xt0ncfwk5"]
+[gd_scene load_steps=16 format=3 uid="uid://crl3xt0ncfwk5"]
 
 [ext_resource type="Script" path="res://scripts/Monster.gd" id="1_l6rov"]
 [ext_resource type="Texture2D" uid="uid://b47bubvnmsv00" path="res://assets/临时资源/character/48x48/Orcs/Orc Villager 01 48.png" id="2_mlbtv"]
 [ext_resource type="Theme" uid="uid://c3v6nbfriop2c" path="res://scenes/MonsterHPBarTheme.tres" id="3_sfm5b"]
 [ext_resource type="LabelSettings" uid="uid://cx6fnsfwwj8i2" path="res://scenes/MonsterHPBarFont.tres" id="4_o55ig"]
+[ext_resource type="PackedScene" uid="uid://da7p4mjn8geyf" path="res://scenes/ui_prefab/monster_damage.tscn" id="5_iibow"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ut88c"]
 
@@ -363,3 +364,12 @@ offset_right = 23.0
 offset_bottom = 31.5
 text = "26"
 label_settings = ExtResource("4_o55ig")
+
+[node name="Damage" parent="Control" instance=ExtResource("5_iibow")]
+layout_mode = 0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+offset_bottom = 1.0
+scale = Vector2(0.6, 0.6)
+text = ""

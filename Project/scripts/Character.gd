@@ -29,6 +29,7 @@ var attack_in_cd = false
 @onready var attack_cd = $AttackCD
 @onready var ray_array = [ray_up,ray_down,ray_left,ray_right]
 @onready var animator = $CharacterSprite/AnimationPlayer
+var damage_display_array = []
 
 var inputs = {
 	4: Vector2.RIGHT,
@@ -79,6 +80,14 @@ func _input(event):
 			change_eq_box.change_eq_choose("left",self,Main_gd.delete_eq)
 		elif event.is_action_pressed("movedown"):
 			change_eq_box.change_eq_choose("down",self,Main_gd.delete_eq)
+	if !Main_gd.player_control && Main_gd.is_equipment_get:
+		var get_eq_box = $"/root/Main/Control/PopUpBox"
+		if event.is_action_pressed("moveright"):
+			get_eq_box.get_eq_choose("right",self,Main_gd.delete_eq)
+		elif event.is_action_pressed("moveleft"):
+			get_eq_box.get_eq_choose("left",self,Main_gd.delete_eq)
+		elif event.is_action_pressed("movedown"):
+			get_eq_box.get_eq_choose("down",self,Main_gd.delete_eq)
 	if !Main_gd.player_control && Main_gd.is_property_change:
 		var change_pp_box = $"/root/Main/Control/PopUpBox"
 		if event.is_action_pressed("moveright"):
@@ -117,6 +126,7 @@ func _physics_process(delta):
 
 	if moving || !Main_gd.player_control:
 		return
+		#检测四方向碰撞
 	var collider = ray_array[movement_direction-1].get_collider()
 	if movement_direction != 0:
 		if !collider:
@@ -167,6 +177,25 @@ func move(dir):
 	animator.stop()
 	ui_manager.refresh_ui(self)
 	animator.play(player_anims_idle[dir])
+	damage_display()
+
+func damage_display():
+	for n in damage_display_array:
+		if is_instance_valid(n):
+			n.get_node("Control/Damage").text = ""
+	damage_display_array = []
+	for i in ray_array:
+		var collider = i.get_collider()
+		if collider:
+			if collider.is_in_group("Monster"):
+				#var damage_label = load("res://scenes/ui_prefab/monster_damage.tscn").instantiate()
+				#collider.get_node("Control").add_child(damage_label)
+				var damage = collider.ATT - DEF
+				if damage < 0:
+					damage = 0
+				collider.get_node("Control/Damage").text = "-"+str(damage)
+				damage_display_array.append(collider)
+				
 
 func _on_attack_cd_timeout():
 	#长按方向键时的攻击CD计时

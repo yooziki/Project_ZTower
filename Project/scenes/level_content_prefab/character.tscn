@@ -175,6 +175,22 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_rfux0"]
+resource_name = "dodged"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.56905, 0.0]
+}
+
 [sub_resource type="Animation" id="Animation_0bnn5"]
 resource_name = "idle"
 length = 2.8
@@ -311,22 +327,6 @@ tracks/0/keys = {
 "values": [56, 57, 58, 59]
 }
 
-[sub_resource type="Animation" id="Animation_rfux0"]
-resource_name = "dodged"
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:skew")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 1.56905, 0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jcjxj"]
 _data = {
 "RESET": SubResource("Animation_wkgao"),
@@ -357,7 +357,7 @@ script = ExtResource("1_yh3su")
 move_speed = 6
 HP = 10
 MAXHP = 10
-ATT = 3
+ATT = 30
 DEF = 1
 LUCK = 0
 DOG = 50

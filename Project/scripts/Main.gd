@@ -5,6 +5,7 @@ var player_control = true
 var changing_eq:int
 var delete_eq
 var is_equipment_change = false
+var is_equipment_get = false
 var is_property_change = false
 var equipment_rare_list:Array[Array] = [[],[],[],[]]
 var equipment_rare_weight = [40,70,85,90]
@@ -31,6 +32,28 @@ func level_id_random():
 		print(i)
 		level_array.append(level_data[i].levelPool.pick_random())
 	print("随机关卡完成："+str(level_array))	
+
+func random_equipment():
+	var rare = random_equipment_rare()
+	print(rare)
+	# var eq_id = RandomNumberGenerator.new().randi_range(0,Main_gd.equipment_rare_list[rare-1].size()-1)
+	var eq = Main_gd.equipment_rare_list[rare-1].pick_random()
+	return eq
+
+
+func random_equipment_rare():
+	var all_weight = Main_gd.equipment_rare_weight[-1]
+	var rare = 0
+	var random_number = RandomNumberGenerator.new().randi_range(1,all_weight)
+	if random_number <= Main_gd.equipment_rare_weight[0]:
+		rare = 1
+	elif random_number <= Main_gd.equipment_rare_weight[1]:
+		rare = 2 
+	elif random_number <= Main_gd.equipment_rare_weight[2]:
+		rare = 3 
+	else:
+		rare = 4 
+	return rare
 
 func _process(delta):
 	pass

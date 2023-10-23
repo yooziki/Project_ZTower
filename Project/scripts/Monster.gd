@@ -8,6 +8,7 @@ var DEF: int
 var DOG: int
 var NAME: String
 var rng = RandomNumberGenerator.new()
+var monster_data
 
 var CRI_times = 2
 @onready var animator = $MonsterSprite/AnimationPlayer
@@ -80,20 +81,20 @@ func attack_player(player,dir):
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("创建 Monster："+name)
-	HP = 15
-	ATT = 2
-	SPD = 100
 	$Control/BarHP.min_value = 0
 	$Control/BarHP.max_value = HP	
-	$MonsterSprite.position = Vector2(-0,0)
-	$MonsterSprite.rotation = 0
-	$MonsterSprite.scale = Vector2(0.5,0.5)
-	$MonsterSprite.skew = 0
-	$MonsterSprite.modulate = Color(1, 1, 1, 1)
+
 	animator.play("idle_down")
 	refresh_ui()
 	pass
+
+	eq_data = Settings.equipementConfig.data
+	self_data = Main_gd.random_equipment()
+	var sprite_node = get_node("EquipmentSprite")
+	if sprite_node:
+		sprite_node.texture = load("res://assets/临时资源/像素RPG游戏图标 装备物品道具武器素材 手游2D资源防具技能食物/"+self_data.icon)
+
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

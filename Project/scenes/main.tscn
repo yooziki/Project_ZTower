@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://di3jfrboebmws"]
+[gd_scene load_steps=29 format=3 uid="uid://di3jfrboebmws"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_e4qtw"]
 [ext_resource type="Script" path="res://scripts/Level.gd" id="2_c5o1y"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://do103gbf2nugs" path="res://assets/icon/value/hearts.svg" id="15_ecdta"]
 [ext_resource type="FontFile" uid="uid://domtnkn4bon4p" path="res://assets/font/ark-pixel-10px-monospaced-ja.otf" id="15_lgbpk"]
 [ext_resource type="PackedScene" uid="uid://c1ocw21be3t3w" path="res://scenes/ui_prefab/eq_panel.tscn" id="16_vwf6j"]
+[ext_resource type="PackedScene" uid="uid://da7p4mjn8geyf" path="res://scenes/ui_prefab/monster_damage.tscn" id="17_c5yna"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_ddv83"]
 
@@ -490,6 +491,9 @@ offset_left = 267.0
 offset_top = 124.0
 offset_right = 307.0
 offset_bottom = 164.0
+
+[node name="Label" parent="Control" instance=ExtResource("17_c5yna")]
+layout_mode = 0
 
 [node name="Level" type="Node2D" parent="."]
 position = Vector2(267, 124)

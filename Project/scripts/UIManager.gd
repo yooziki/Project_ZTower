@@ -16,7 +16,7 @@ extends Node
 @onready var IconLUCK = $PlayerValueBox/IconLUCK
 @onready var IconHP = $PlayerInfoBox/IconHP
 @onready var HPChangeBox = $HPChangeBox
-@onready var EqBox = $PlayerEqBox.get_children()
+var EqBox
 @onready var buff_data = Settings.buffConfig.data
 
 
@@ -60,31 +60,41 @@ func _ready():
 func _process(delta):
 	pass
 	
-func show_eq_des_box(index):
-	if Main_gd.eq_slot[index]:
-		EqBox[5].get_node("LabelEqDes").text = Main_gd.eq_slot[index].self_data.des
-		EqBox[5].get_node("LabelEqName").text = Main_gd.eq_slot[index].self_data.name
-		EqBox[5].get_node("IconEq").texture = load("res://assets/临时资源/像素RPG游戏图标 装备物品道具武器素材 手游2D资源防具技能食物/"+Main_gd.eq_slot[index].self_data.icon)
-		EqBox[5].position = EqBox[index].position + Vector2(45,0)
-		var buff_id = Main_gd.eq_slot[index].self_data.buffID
+func eq_panel_des(panel, eq_data):
+
+		panel.get_node("LabelEqDes").text = eq_data.des
+		panel.get_node("LabelEqName").text = eq_data.name
+		panel.get_node("IconEq").texture = load("res://assets/临时资源/像素RPG游戏图标 装备物品道具武器素材 手游2D资源防具技能食物/"+eq_data.icon)
+		var buff_id = eq_data.buffID
 		var pp_index = 1
 		if buff_data[buff_id]["ATT"] != 0:
-			EqBox[5].get_node("LabelPP"+str(pp_index)).text = str(buff_data[buff_id]["ATT"])
-			EqBox[5].get_node("IconPP"+str(pp_index)).texture = icon_array[1].texture
+			panel.get_node("LabelPP"+str(pp_index)).text = str(buff_data[buff_id]["ATT"])
+			panel.get_node("IconPP"+str(pp_index)).texture = icon_array[1].texture
+			panel.get_node("IconPP"+str(pp_index)).modulate = IconATT.modulate
 			pp_index += 1
 		if buff_data[buff_id]["DEF"] != 0:
-			EqBox[5].get_node("LabelPP"+str(pp_index)).text = str(buff_data[buff_id]["DEF"])
-			EqBox[5].get_node("IconPP"+str(pp_index)).texture = icon_array[2].texture
+			panel.get_node("LabelPP"+str(pp_index)).text = str(buff_data[buff_id]["DEF"])
+			panel.get_node("IconPP"+str(pp_index)).texture = icon_array[2].texture
+			panel.get_node("IconPP"+str(pp_index)).modulate = IconDEF.modulate
 			pp_index += 1
 		if buff_data[buff_id]["SPD"] != 0:
-			EqBox[5].get_node("LabelPP"+str(pp_index)).text = str(buff_data[buff_id]["SPD"])
-			EqBox[5].get_node("IconPP"+str(pp_index)).texture = icon_array[3].texture
+			panel.get_node("LabelPP"+str(pp_index)).text = str(buff_data[buff_id]["SPD"])
+			panel.get_node("IconPP"+str(pp_index)).texture = icon_array[3].texture
+			panel.get_node("IconPP"+str(pp_index)).modulate = IconSPD.modulate
 			pp_index += 1
 		if buff_data[buff_id]["LUCK"] != 0:
-			EqBox[5].get_node("LabelPP"+str(pp_index)).text = str(buff_data[buff_id]["LUCK"])
-			EqBox[5].get_node("IconPP"+str(pp_index)).texture = icon_array[4].texture
+			panel.get_node("LabelPP"+str(pp_index)).text = str(buff_data[buff_id]["LUCK"])
+			panel.get_node("IconPP"+str(pp_index)).texture = icon_array[4].texture
+			panel.get_node("IconPP"+str(pp_index)).modulate = IconLUCK.modulate
 			pp_index += 1
-		#需要把buff结构改为枚举类后再做
+
+func show_eq_des_box(index):
+	if !EqBox:
+		EqBox = $PlayerEqBox.get_children() #如果放在onready会获取不到
+	if Main_gd.eq_slot[index]:
+		eq_panel_des(EqBox[5],Main_gd.eq_slot[index].self_data)
+		EqBox[5].position = EqBox[index].position + Vector2(45,0)
+		#需要把buff结构改为枚举类后再改结构
 		
 		
 func _on_eq_1_mouse_entered():

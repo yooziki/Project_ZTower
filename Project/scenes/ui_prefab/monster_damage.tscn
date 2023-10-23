@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://da7p4mjn8geyf"]
+
+[ext_resource type="LabelSettings" uid="uid://debsfgvwloi8d" path="res://scenes/SmallLabelSetting.tres" id="1_063ao"]
+
+[node name="Label" type="Label"]
+modulate = Color(0.811765, 0, 0, 1)
+offset_right = 40.0
+offset_bottom = 23.0
+pivot_offset = Vector2(20, 12)
+text = "-3"
+label_settings = ExtResource("1_063ao")
+horizontal_alignment = 1
+vertical_alignment = 1

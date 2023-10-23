@@ -21,7 +21,7 @@ var self_data = {
 @onready var player_eq_box = control.get_node("PlayerEqBox")
 
 func get_equipment(chara,eq_id,delete_eq,is_play_delete_anim):
-	dying = true
+	delete_eq.dying = true
 	var buff_id = eq_data[eq_id].buffID
 	Buff_gd.add_buff(chara,buff_id)
 	print(eq_data[eq_id].icon)
@@ -29,11 +29,11 @@ func get_equipment(chara,eq_id,delete_eq,is_play_delete_anim):
 	if Main_gd.eq_slot[eq_data[eq_id].slotID]:
 		Buff_gd.remove_buff(chara,Main_gd.eq_slot[eq_data[eq_id].slotID].self_data.buffID)
 	
-	Main_gd.eq_slot[eq_data[eq_id].slotID] = self.duplicate()
-	print("复制到了全局slot的self_data:"+str(Main_gd.eq_slot[eq_data[eq_id].slotID].self_data))
+	Main_gd.eq_slot[eq_data[eq_id].slotID] = eq_data[eq_id]
+	print("复制到了全局slot的self_data:"+str(Main_gd.eq_slot[eq_data[eq_id].slotID]))
 	print("当前自己的self_data:"+str(self_data))
 	Main_gd.eq_slot[eq_data[eq_id].slotID].self_data = self_data
-	print("第二次复制到了全局slot的self_data:"+str(Main_gd.eq_slot[eq_data[eq_id].slotID].self_data))
+	print("第二次复制到了全局slot的self_data:"+str(Main_gd.eq_slot[eq_data[eq_id].slotID]))
 	Equipment_gd.player_eq_box.get_child(eq_data[eq_id].slotID).get_node("TextureRect").texture = eq_icon
 	Equipment_gd.player_eq_box.get_child(eq_data[eq_id].slotID).get_node("Label").text = ""
 	control.refresh_ui(chara)
@@ -81,8 +81,10 @@ func change_equipment(eq_id):
 
 func _ready():
 	eq_data = Settings.equipementConfig.data
-
-	pass
+	self_data = Main_gd.random_equipment()
+	var sprite_node = get_node("EquipmentSprite")
+	if sprite_node:
+		sprite_node.texture = load("res://assets/临时资源/像素RPG游戏图标 装备物品道具武器素材 手游2D资源防具技能食物/"+self_data.icon)
 
 
 func _process(delta):
